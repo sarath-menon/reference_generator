@@ -1,11 +1,14 @@
-cmake_minimum_required(VERSION 3.0.0)
-project(reference_generator VERSION 0.1.0)
+cmake_minimum_required(VERSION 3.16)
+project(reference_generator VERSION 0.1)
+set(CMAKE_CXX_STANDARD 17)
 
-include(CTest)
-enable_testing()
+# Find requirements
+find_package(fastcdr REQUIRED)
+find_package(fastrtps REQUIRED)
+find_package(MAVSDK REQUIRED)
 
-add_executable(reference_generator main.cpp)
 
-set(CPACK_PROJECT_NAME ${PROJECT_NAME})
-set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
-include(CPack)
+add_subdirectory(lib)
+add_subdirectory(apps)
+add_subdirectory(tests)
+
