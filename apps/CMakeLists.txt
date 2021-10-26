@@ -1,2 +1,3 @@
 add_subdirectory(circle_traj)
 add_subdirectory(square_traj)
+add_subdirectory(go_to_position)
