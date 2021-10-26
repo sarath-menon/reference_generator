@@ -21,8 +21,9 @@ int main() {
   position_pub.init();
 
   // Set position
-  pos_cmd.position.x = 0;
-  pos_cmd.position.y = 3;
+
+  pos_cmd.position.x = 2;
+  pos_cmd.position.y = 5;
   pos_cmd.position.z = 3;
 
   for (int i = 0; i < 300; i++) {
