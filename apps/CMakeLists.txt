@@ -1,3 +1,4 @@
-add_subdirectory(circle_traj)
+add_subdirectory(circle_traj_position)
+add_subdirectory(circle_traj_velocity)
 add_subdirectory(square_traj)
 add_subdirectory(go_to_position)
