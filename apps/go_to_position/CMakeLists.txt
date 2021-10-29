@@ -7,6 +7,7 @@ target_link_libraries(go_to_position PRIVATE
 comm_lib
 fastcdr 
 fastrtps
+yaml-cpp
 )
 
 

@@ -8,7 +8,7 @@
 #include <math.h>
 
 // Step size in seconds
-constexpr static float dt = 0.1;
+constexpr static float dt = 0.01;
 constexpr static int dt_ms = dt * 1000;
 
 // angel in radians
@@ -46,7 +46,7 @@ int main() {
   constexpr static int circles_number = 4;
 
   // for (int i = 0; i < i_max * 2; i++) {
-  for (int i = 0; i < i_max * circles_number; i++) {
+  for (;;) {
 
     // COmpute x,y coordinates
     // std::cout << "Timestep:" << i << '\n';
@@ -55,7 +55,7 @@ int main() {
     velocity_msg.velocity.z = 0;
 
     theta += (theta_dot * dt);
-    std::cout << "Angle:" << theta * 180 / M_PI << std::endl;
+    // std::cout << "Angle:" << theta * 180 / M_PI << std::endl;
 
     // Delay for quad to catch up
     std::this_thread::sleep_for(std::chrono::milliseconds(dt_ms));
@@ -64,8 +64,12 @@ int main() {
   }
 
   // Set velocity to zero at the end
-  velocity_msg.velocity.x = 0;
-  velocity_msg.velocity.y = 0;
-  velocity_msg.velocity.z = 0;
-  velocity_pub.publish(velocity_msg);
+  for (int i = 0; i < 10; i++) {
+
+    velocity_msg.velocity.x = 0;
+    velocity_msg.velocity.y = 0;
+    velocity_msg.velocity.z = 0;
+    velocity_pub.publish(velocity_msg);
+    std::this_thread::sleep_for(std::chrono::milliseconds(dt_ms));
+  }
 }
