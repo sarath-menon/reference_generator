@@ -35,6 +35,7 @@ int main() {
   pos_cmd.position.z = parameters::z_position;
 
   for (int i = 0; i < 300; i++) {
+    // for (;;) {
     // Go to center
     position_pub.publish(pos_cmd);
     // // Delay for quad to catch up
