@@ -12,12 +12,12 @@
 // acceleration
 
 // define the duration:
-double Tf = 1.0;
+double Tf = 2.0;
 
 double f_min = 5;         //[m/s**2]
 double f_max = 25;        //[m/s**2]
 double wmax = 20;         //[rad/s]
-double minTimeSec = 0.01; //[s]
+double minTimeSec = 0.02; //[s]
 
 // Define how gravity lies in our coordinate system
 Vec3 gravity = Vec3(0, 0, -9.81); //[m/s**2]
@@ -46,7 +46,7 @@ int main() {
   Vec3 accf = Vec3(0, 0, 0);
 
   // Generate trajectory
-  RapidTrajectoryGenerator traj(pos0, vel0, acc0, gravity);
+  RapidTrajectoryGenerator traj_1(pos0, vel0, acc0, gravity);
 
   // seconds to milliseconds
   const int delay_time = parameters::dt * 1000;
@@ -65,10 +65,10 @@ int main() {
   position_pub.init();
 
   // Generate trajectory
-  traj.SetGoalPosition(posf);
-  traj.SetGoalVelocity(velf);
-  traj.SetGoalAcceleration(accf);
-  traj.Generate(Tf);
+  traj_1.SetGoalPosition(posf);
+  traj_1.SetGoalVelocity(velf);
+  traj_1.SetGoalAcceleration(accf);
+  traj_1.Generate(Tf);
 
   // Set position
   pos_cmd.position.x = parameters::x_start;
@@ -79,20 +79,20 @@ int main() {
   position_pub.publish(pos_cmd);
 
   // Delay for quad to catch up
-  std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+  std::this_thread::sleep_for(std::chrono::seconds(5));
 
   std::cout << "Starting swooping";
 
   for (double i = 0; i < Tf; i += parameters::dt) {
     // Set position
-    pos_cmd.position.x = traj.GetPosition(i).x;
-    pos_cmd.position.y = traj.GetPosition(i).y;
-    pos_cmd.position.z = traj.GetPosition(i).z;
+    pos_cmd.position.x = traj_1.GetPosition(i).x;
+    pos_cmd.position.y = traj_1.GetPosition(i).y;
+    pos_cmd.position.z = traj_1.GetPosition(i).z;
 
-    std::cout << "Timestep:" << i << std::endl;
-    std::cout << "Position:" << '\t' << traj.GetPosition(i).x << '\t'
-              << traj.GetPosition(i).y << '\t' << traj.GetPosition(i).z
-              << std::endl;
+    // std::cout << "Timestep:" << i << std::endl;
+    // std::cout << "Position:" << '\t' << traj_1.GetPosition(i).x << '\t'
+    //           << traj_1.GetPosition(i).y << '\t' << traj_1.GetPosition(i).z
+    //           << std::endl;
 
     // Publish command
     position_pub.publish(pos_cmd);
@@ -101,45 +101,59 @@ int main() {
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time));
   }
 
-  std::cout << "Waiting for quad to catch up";
+  // for (double i = 0.7; i > 0.4; i -= 0.01) {
+
+  //   pos_cmd.position.z = i;
+  //   // Publish command
+  //   position_pub.publish(pos_cmd);
+
+  //   // Delay for quad to catch up
+  //   std::this_thread::sleep_for(std::chrono::milliseconds(delay_time));
+  // }
+  // std::cout << "Waiting for quad to catch up";
   // Delay for quad to catch up
-  std::this_thread::sleep_for(std::chrono::milliseconds(2000));
+  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
   //////////////////////////////////////////////////////////////////
   // Swoop second part
   // Define the trajectory starting state:
   pos0 = Vec3(parameters::x_mid, parameters::y_mid,
-              parameters::z_mid);              // position
-  vel0 = Vec3(parameters::mid_velocity, 0, 0); // velocity
-  acc0 = Vec3(0, 0, 0);                        // acceleration
+              parameters::z_mid); // position
+  vel0 = Vec3(0, 0, 0);           // velocity
+  acc0 = Vec3(0, 0, 0);           // acceleration
 
   // define the goal state:
   posf = Vec3(parameters::x_final, parameters::y_final,
-              parameters::z_final);            // position
-  velf = Vec3(parameters::mid_velocity, 0, 0); // velocity
+              parameters::z_final); // position
+  velf = Vec3(0, 0, 0);             // velocity
   accf = Vec3(0, 0, 0);
 
   // Generate trajectory
-  traj.SetGoalPosition(posf);
-  traj.SetGoalVelocity(velf);
-  traj.SetGoalAcceleration(accf);
-  traj.Generate(Tf);
+  RapidTrajectoryGenerator traj_2(pos0, vel0, acc0, gravity);
+
+  // Generate traj_2ectory
+  traj_2.SetGoalPosition(posf);
+  traj_2.SetGoalVelocity(velf);
+  traj_2.SetGoalAcceleration(accf);
+  traj_2.Generate(Tf);
 
   for (double i = 0; i < Tf; i += parameters::dt) {
     // Set position
-    pos_cmd.position.x = traj.GetPosition(i).x;
-    pos_cmd.position.y = traj.GetPosition(i).y;
-    pos_cmd.position.z = traj.GetPosition(i).z;
+    pos_cmd.position.x = traj_2.GetPosition(i).x;
+    pos_cmd.position.y = traj_2.GetPosition(i).y;
+    pos_cmd.position.z = traj_2.GetPosition(i).z;
 
-    std::cout << "Timestep:" << i << std::endl;
-    std::cout << "Position:" << '\t' << traj.GetPosition(i).x << '\t'
-              << traj.GetPosition(i).y << '\t' << traj.GetPosition(i).z
-              << std::endl;
+    // std::cout << "Timestep:" << i << std::endl;
+    // std::cout << "Position:" << '\t' << traj_2.GetPosition(i).x << '\t'
+    //           << traj_2.GetPosition(i).y << '\t' <<
+    // traj_2.GetPosition(i).z
+    //           << std::endl;
 
-    // Publish command
-    position_pub.publish(pos_cmd);
+  // Publish command
+  position_pub.publish(pos_cmd);
 
     // Delay for quad to catch up
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time));
+    // std::cout << std::endl;
   }
 }
