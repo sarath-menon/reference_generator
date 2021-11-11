@@ -1,0 +1,19 @@
+# Set position setpoints
+
+x_start: -2.0 #[meters]
+y_start: 0.0 #[meters]
+z_start: 2.0 #[meters]
+
+x_mid: 0.0 #[meters]
+y_mid: 0.0 #[meters]
+z_mid: 0.70 #[meters]
+
+x_final: 2.0 #[meters]
+y_final: 0.0 #[meters]
+z_final: 2.0 #[meters]
+
+mid_velocity: 0.3
+
+dt: 0.02 # [seconds]
+
+completion_time: 1.5
