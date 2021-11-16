@@ -6,7 +6,7 @@ z_start: 2.0 #[meters]
 
 x_mid: 0.0 #[meters]
 y_mid: 0.0 #[meters]
-z_mid: 0.70 #[meters]
+z_mid: 0.30 #[meters]
 
 x_final: 2.0 #[meters]
 y_final: 0.0 #[meters]

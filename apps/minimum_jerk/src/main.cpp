@@ -12,7 +12,7 @@
 // acceleration
 
 // define the duration:
-double Tf = 2.0;
+double Tf = 1.0;
 
 double f_min = 5;         //[m/s**2]
 double f_max = 25;        //[m/s**2]
@@ -79,7 +79,7 @@ int main() {
   position_pub.publish(pos_cmd);
 
   // Delay for quad to catch up
-  std::this_thread::sleep_for(std::chrono::seconds(5));
+  std::this_thread::sleep_for(std::chrono::seconds(3));
 
   std::cout << "Starting swooping";
 

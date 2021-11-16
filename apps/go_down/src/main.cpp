@@ -1,20 +1,20 @@
-#include "AttitudeCommandPubSubTypes.h"
+#include "QuadAttitudeCommandPubSubTypes.h"
 #include "default_participant.h"
 #include "default_publisher.h"
-#include "quadcopter_msgs/msgs/AttitudeCommand.h"
+#include "quadcopter_msgs/msgs/QuadAttitudeCommand.h"
 #include <chrono>
 #include <cstdlib>
 #include <future>
 
 int main() {
   // Quadcopter position msg
-  cpp_msg::AttitudeCommand att_msg{};
+  cpp_msg::QuadAttitudeCommand att_msg{};
 
   // Create participant. Arguments-> Domain id, QOS name
   DefaultParticipant dp(0, "quad_reference_publisher");
 
   // Create publisher with msg type
-  DDSPublisher att_pub(idl_msg::AttitudeCommandPubSubType(), "attitude_cmd",
+  DDSPublisher att_pub(idl_msg::QuadAttitudeCommandPubSubType(), "attitude_cmd",
                             dp.participant());
 
   // Initialize publisher
@@ -23,10 +23,9 @@ int main() {
   constexpr static float starting_height = 1.5;
   constexpr static float stop_height = 0.5;
 
-  constexpr static float quad_mass = 1.519;
-  constexpr static float hover_thrust = 9.81*quad_mass;
   constexpr static float motor_max_thrust = 8.986;
   constexpr static float quad_max_thrust = motor_max_thrust*4;
+  constexpr static float hover_thrust = 9.81/quad_max_thrust;
 
 
   constexpr static float start_thrust = 0.26;
