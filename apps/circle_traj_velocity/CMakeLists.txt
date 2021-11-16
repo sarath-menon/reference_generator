@@ -1,9 +1,9 @@
 
-add_executable(circle_traj src/main.cpp)
+add_executable(circle_traj_velocity src/main.cpp)
 
-target_include_directories(circle_traj PUBLIC include)
+target_include_directories(circle_traj_velocity PUBLIC include)
 
-target_link_libraries(circle_traj PRIVATE
+target_link_libraries(circle_traj_velocity PRIVATE
 comm_lib
 fastcdr 
 fastrtps
