@@ -73,7 +73,7 @@ public:
 
 public:
   /// Setter function
-  bool set_desired_pos(const cpp_msg::Position desired_pos);
+  bool go_to_pos();
 
 public:
   void set_parameters(const std::string path);

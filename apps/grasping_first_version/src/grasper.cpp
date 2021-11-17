@@ -38,8 +38,7 @@ Grasper::~Grasper() {
 }
 
 /// Setter function
-bool Grasper::set_desired_pos(const cpp_msg::Position desired_pos) {
-  desired_pos_ = desired_pos;
+bool Grasper::go_to_pos() {
 
   // time counter
   float t_counter{};

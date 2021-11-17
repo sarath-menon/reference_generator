@@ -12,15 +12,9 @@ int main() {
   Grasper grasper;
 
   grasper.set_parameters(paths::parameters_path);
-  // grasper.set_setpoints(paths::setpoints_path);
+  grasper.set_setpoints(paths::setpoint_path);
 
-  cpp_msg::Position desired_pos;
-
-  // Setting desired pos
-  desired_pos.x = 1.0;
-  desired_pos.y = 1.0;
-  desired_pos.z = 1.5;
-  bool status = grasper.set_desired_pos(desired_pos);
+  bool status = grasper.go_to_pos();
 
   std::cout << "Target status:" << status << std::endl;
 
