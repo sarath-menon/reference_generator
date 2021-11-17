@@ -45,6 +45,9 @@ bool Grasper::go_to_pos() {
 
   while (t_counter < grasping_time_) {
 
+    std::cout << "Checking" << std::endl;
+    std::cout << "Delay time" << delay_time_ << std::endl;
+
     t_counter += dt_;
 
     //  Delay for quad to catch up

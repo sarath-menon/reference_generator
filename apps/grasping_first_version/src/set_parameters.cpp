@@ -13,7 +13,7 @@ void Grasper::set_parameters(const std::string path) {
 
   // Set setpoints
   dt_ = setpoint_yaml["dt"].as<float>();
-  delay_time_ = (int)dt_ * 1000;
+  delay_time_ = int(dt_ * 1000);
 
   xy_threshold_ = setpoint_yaml["xy_threshold"].as<float>();
   z_threshold_ = setpoint_yaml["z_threshold"].as<float>();
