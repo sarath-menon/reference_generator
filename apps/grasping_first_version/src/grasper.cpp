@@ -45,15 +45,15 @@ bool Grasper::go_to_pos() {
 
   while (t_counter < grasping_time_) {
 
-    std::cout << "Checking" << std::endl;
-    std::cout << "Delay time" << delay_time_ << std::endl;
-
     t_counter += dt_;
 
     //  Delay for quad to catch up
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time_));
 
     // Check whether position reached
+    // std::cout << "Current pose:" << current_pose_.pose.position.x << '\t'
+    //           << current_pose_.pose.position.y << '\t'
+    //           << current_pose_.pose.position.z << std::endl;
 
     x_reach_flag = check_reached(current_pose_.pose.position.x, desired_pos_.x,
                                  xy_threshold_);
@@ -62,11 +62,26 @@ bool Grasper::go_to_pos() {
     z_reach_flag = check_reached(current_pose_.pose.position.z, desired_pos_.z,
                                  z_threshold_);
 
+    std::cout << "Reached flags: " << x_reach_flag << '\t' << y_reach_flag
+              << '\t' << z_reach_flag << std::endl;
+
     // exit if position has been reached
     if (x_reach_flag && x_reach_flag && x_reach_flag == true) {
       std::cout << "Target position has been reached";
       return true;
       break;
+    }
+
+    // Send positon cmd if positon not reach
+    else {
+      // Set pos cmd
+      quad_pos_cmd.position.x = desired_pos_.x;
+      quad_pos_cmd.position.y = desired_pos_.y;
+      quad_pos_cmd.position.z = desired_pos_.z;
+
+      position_pub->publish(desired_pos_);
+
+      std::cout << "sent pos cmd";
     }
   }
 

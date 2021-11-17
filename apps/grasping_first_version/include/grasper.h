@@ -22,6 +22,9 @@ private:
   // Current state
   cpp_msg::Position desired_pos_{};
 
+  // position cmd sent to quad
+  cpp_msg::QuadPositionCmd quad_pos_cmd{};
+
 public:
   // Create doamin participant
   std::unique_ptr<DefaultParticipant> dp;

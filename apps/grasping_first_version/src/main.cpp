@@ -17,12 +17,4 @@ int main() {
   bool status = grasper.go_to_pos();
 
   std::cout << "Target status:" << status << std::endl;
-
-  // for (int i = 0; i < 10; i++) {
-
-  //   grasper.mocap_sub->listener->wait_for_data();
-
-  //   std::cout << "x position:" << grasper.current_pose().pose.position.x
-  //             << std::endl;
-  // }
 }
