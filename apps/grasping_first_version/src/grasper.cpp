@@ -4,6 +4,7 @@ bool check_reached(const float &current_pos, const float &desired_pos,
                    const float &threshold) {
   // Compute position difference
   float pos_diff = abs(current_pos - desired_pos);
+
   if (pos_diff <= threshold) {
     return true;
   } else {
@@ -51,9 +52,9 @@ bool Grasper::go_to_pos() {
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time_));
 
     // Check whether position reached
-    // std::cout << "Current pose:" << current_pose_.pose.position.x << '\t'
-    //           << current_pose_.pose.position.y << '\t'
-    //           << current_pose_.pose.position.z << std::endl;
+    std::cout << "Current pose:" << current_pose_.pose.position.x << '\t'
+              << current_pose_.pose.position.y << '\t'
+              << current_pose_.pose.position.z << std::endl;
 
     x_reach_flag = check_reached(current_pose_.pose.position.x, desired_pos_.x,
                                  xy_threshold_);
@@ -66,7 +67,7 @@ bool Grasper::go_to_pos() {
               << '\t' << z_reach_flag << std::endl;
 
     // exit if position has been reached
-    if (x_reach_flag && x_reach_flag && x_reach_flag == true) {
+    if (x_reach_flag && y_reach_flag && z_reach_flag == true) {
       std::cout << "Target position has been reached";
       return true;
       break;
@@ -79,7 +80,7 @@ bool Grasper::go_to_pos() {
       quad_pos_cmd.position.y = desired_pos_.y;
       quad_pos_cmd.position.z = desired_pos_.z;
 
-      position_pub->publish(desired_pos_);
+      // position_pub->publish(desired_pos_);
 
       std::cout << "sent pos cmd";
     }
