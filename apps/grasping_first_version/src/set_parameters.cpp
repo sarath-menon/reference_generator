@@ -56,29 +56,39 @@ void Grasper::set_setpoints(const std::string path, const int index) {
   std::vector<float> y_ref;
   std::vector<float> z_ref;
   std::vector<float> time;
-  std::vector<float> data;
+
   std::string line;
 
-  while (getline(csv_file,line)) {
+  while (getline(csv_file, line)) {
     std::stringstream s_stream(line);
-    while (s_stream.good()) {
-      std::string substr;
-      getline(s_stream, substr, ','); // get first string delimited by comma
-      std::cout << "Substr:" << substr<< std::endl;
-      data.push_back(std::stof(substr));
+
+    for (int i = 0; i < 4; i++) {
+      if (s_stream.good()) {
+        std::string substr;
+        getline(s_stream, substr, ','); // get first string delimited by comma
+
+        switch (i) {
+        case 0:
+          x_ref.push_back(std::stof(substr));
+          break;
+        case 1:
+          y_ref.push_back(std::stof(substr));
+          break;
+        case 2:
+          z_ref.push_back(std::stof(substr));
+          break;
+        case 3:
+          time.push_back(std::stof(substr));
+          break;
+        }
+      }
     }
   }
 
-  std::cout << "Size:" << data.size()<< std::endl;
-
-  for (int i = 0; i < data.size(); i+=4) {
-    std::cout << i << ": (" << data.at(i) << "," << data.at(i + 1) << ","
-              << data.at(i + 2) << ") time:" << data.at(i + 3) << std::endl;
-
-              
+  for (int i = 0; i < 4; i++) {
+    std::cout << "Waypoint: " << i << ": (" << x_ref.at(i) << "," << y_ref.at(i)
+              << "," << z_ref.at(i) << ") time:" << time.at(i) << std::endl;
   }
-
-
 
   csv_file.close();
 }
