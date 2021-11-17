@@ -81,5 +81,5 @@ public:
 public:
   void set_parameters(const std::string path);
 
-  void set_setpoints(const std::string path);
+  void set_setpoints(const std::string path, const int index);
 };
