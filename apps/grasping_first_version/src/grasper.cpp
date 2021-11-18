@@ -88,6 +88,6 @@ bool Grasper::go_to_pos(const int index) {
   }
 
   // If we reach here, then target coudln't be reached in specified time
-  std::cerr << "Setpoint couldn't be reached in given time limit of ";
+  std::cerr << "Setpoint couldn't be reached in given time limit";
   return false;
 }
