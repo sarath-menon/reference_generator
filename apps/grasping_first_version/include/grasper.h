@@ -53,10 +53,10 @@ private:
   bool z_reach_flag{};
 
   // Containers to store setpoints
-  std::vector<float> x_setpoint_;
-  std::vector<float> y_setpoint_;
-  std::vector<float> z_setpoint_;
-  std::vector<float> max_reach_time_;
+  std::vector<float> x_setpoint_{};
+  std::vector<float> y_setpoint_{};
+  std::vector<float> z_setpoint_{};
+  std::vector<float> max_reach_time_{};
 
 public:
   /// Getter function
