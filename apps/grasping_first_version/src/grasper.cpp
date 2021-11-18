@@ -44,7 +44,7 @@ bool Grasper::go_to_pos() {
   // time counter
   float t_counter{};
 
-  while (t_counter < grasping_time_) {
+  while (t_counter < max_reach_time_) {
 
     t_counter += dt_;
 

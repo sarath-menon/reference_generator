@@ -38,7 +38,7 @@ public:
   // parameter
 public:
   // time to complete grasping manueuver
-  float grasping_time_{};
+  float max_reach_time_{};
 
   // controller sampling time in seconds
   float dt_{};
@@ -72,7 +72,7 @@ public:
   const float &z_threshold() const { return z_threshold_; }
 
   /// Getter function
-  const float &grasping_time() const { return grasping_time_; }
+  const float &max_reach_time() const { return max_reach_time_; }
 
 public:
   /// Setter function

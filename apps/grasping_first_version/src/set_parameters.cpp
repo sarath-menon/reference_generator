@@ -22,7 +22,7 @@ void Grasper::set_parameters(const std::string path) {
   xy_threshold_ = setpoint_yaml["xy_threshold"].as<float>();
   z_threshold_ = setpoint_yaml["z_threshold"].as<float>();
 
-  grasping_time_ = setpoint_yaml["grasping_time"].as<float>(); // [constant]
+  max_reach_time_ = setpoint_yaml["max_reach_time"].as<float>(); // [constant]
 
   // Set target setpoints
 }
