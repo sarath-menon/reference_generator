@@ -15,6 +15,9 @@ int main() {
   grasper.load_setpoints(paths::setpoint_list_path);
 
   bool result = grasper.go_to_pos(0);
+  result = grasper.go_to_pos(1);
+  result = grasper.go_to_pos(2);
+  result = grasper.go_to_pos(3);
 
   // std::cout << "Target status:" << status << std::endl;
 }

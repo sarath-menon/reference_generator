@@ -1,6 +1,6 @@
 # Set position setpoints
 
-dt: 0.01 # [seconds]
+dt: 0.02 # [seconds]
 max_reach_time: 5.0 # [seconds]
 
 xy_threshold: 0.2 #[meters]
