@@ -45,6 +45,7 @@ bool Grasper::go_to_pos(const int index) {
   float t_counter{};
   std::cout << "Setpoint: " << setpoint(index).x << '\t'
         << setpoint(index).y << '\t' << setpoint(index).z << std::endl;
+        
   while (t_counter < max_reach_time_.at(index)) {
 
     t_counter += dt_;

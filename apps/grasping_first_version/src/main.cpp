@@ -19,5 +19,12 @@ int main() {
   result = grasper.go_to_pos(2);
   result = grasper.go_to_pos(3);
 
+  // Delay for grasping
+  //  Delay for quad to catch up
+  std::this_thread::sleep_for(std::chrono::seconds(2));
+
+  result = grasper.go_to_pos(4);
+  result = grasper.go_to_pos(5);
+
   // std::cout << "Target status:" << status << std::endl;
 }

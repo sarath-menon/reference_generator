@@ -48,6 +48,7 @@ private:
   bool x_reach_flag{};
   bool y_reach_flag{};
   bool z_reach_flag{};
+  bool all_reach_flag{};
 
   // Containers to store setpoints
   std::vector<float> x_setpoint_{};
