@@ -39,12 +39,12 @@ Grasper::~Grasper() {
 }
 
 /// Setter function
-bool Grasper::go_to_pos() {
+bool Grasper::go_to_pos(const int index) {
 
   // time counter
   float t_counter{};
 
-  while (t_counter < max_reach_time_) {
+  while (t_counter < max_reach_time_.at(index)) {
 
     t_counter += dt_;
 
@@ -56,15 +56,15 @@ bool Grasper::go_to_pos() {
     //           << current_pose_.pose.position.y << '\t'
     //           << current_pose_.pose.position.z << std::endl;
 
-    x_reach_flag = check_reached(current_pose_.pose.position.x, desired_pos_.x,
-                                 xy_threshold_);
-    y_reach_flag = check_reached(current_pose_.pose.position.y, desired_pos_.y,
-                                 xy_threshold_);
-    z_reach_flag = check_reached(current_pose_.pose.position.z, desired_pos_.z,
-                                 z_threshold_);
+    x_reach_flag = check_reached(current_pose_.pose.position.x,
+                                 setpoint(index)[0], xy_threshold_);
+    y_reach_flag = check_reached(current_pose_.pose.position.y,
+                                 setpoint(index)[1], xy_threshold_);
+    z_reach_flag = check_reached(current_pose_.pose.position.z,
+                                 setpoint(index)[2], z_threshold_);
 
-    std::cout << "Reached flags: " << x_reach_flag << '\t' << y_reach_flag
-              << '\t' << z_reach_flag << std::endl;
+    // std::cout << "Reached flags: " << x_reach_flag << '\t' << y_reach_flag
+    //           << '\t' << z_reach_flag << std::endl;
 
     // exit if position has been reached
     if (x_reach_flag && y_reach_flag && z_reach_flag == true) {
@@ -84,7 +84,7 @@ bool Grasper::go_to_pos() {
       // std::cout << "Desired position:" << desired_pos_.x << '\t'
       //           << desired_pos_.y << '\t' << desired_pos_.z << std::endl;
 
-      position_pub->publish(quad_pos_cmd);
+      // position_pub->publish(quad_pos_cmd);
     }
   }
 

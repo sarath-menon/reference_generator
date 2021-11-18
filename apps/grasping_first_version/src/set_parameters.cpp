@@ -22,25 +22,10 @@ void Grasper::set_parameters(const std::string path) {
   xy_threshold_ = setpoint_yaml["xy_threshold"].as<float>();
   z_threshold_ = setpoint_yaml["z_threshold"].as<float>();
 
-  max_reach_time_ = setpoint_yaml["max_reach_time"].as<float>(); // [constant]
-
   // Set target setpoints
 }
 
-// void Grasper::set_setpoints(const std::string path) {
-
-//   // Safety check, see if file exists
-//   safety_checks::yaml_file_check(path);
-
-//   // Load yaml file containing gains
-//   YAML::Node setpoint_yaml = YAML::LoadFile(path);
-
-//   desired_pos_.x = setpoint_yaml["x_desired"].as<float>(); // [constant]
-//   desired_pos_.y = setpoint_yaml["y_desired"].as<float>(); // [constant]
-//   desired_pos_.z = setpoint_yaml["z_desired"].as<float>(); // [constant]
-// }
-
-void Grasper::set_setpoints(const std::string path, const int index) {
+void Grasper::load_setpoints(const std::string path) {
   // Safety check, see if file exists
   safety_checks::yaml_file_check(path);
 
@@ -51,12 +36,7 @@ void Grasper::set_setpoints(const std::string path, const int index) {
   if (!csv_file.is_open())
     throw std::runtime_error("Could not open file");
 
-  // get line from file
-  std::vector<float> x_ref;
-  std::vector<float> y_ref;
-  std::vector<float> z_ref;
-  std::vector<float> time;
-
+  // to load line from csv
   std::string line;
 
   while (getline(csv_file, line)) {
@@ -65,20 +45,21 @@ void Grasper::set_setpoints(const std::string path, const int index) {
     for (int i = 0; i < 4; i++) {
       if (s_stream.good()) {
         std::string substr;
-        getline(s_stream, substr, ','); // get first string delimited by comma
+        // get succssive substring seperated by comma
+        getline(s_stream, substr, ',');
 
         switch (i) {
         case 0:
-          x_ref.push_back(std::stof(substr));
+          x_setpoint_.push_back(std::stof(substr));
           break;
         case 1:
-          y_ref.push_back(std::stof(substr));
+          y_setpoint_.push_back(std::stof(substr));
           break;
         case 2:
-          z_ref.push_back(std::stof(substr));
+          z_setpoint_.push_back(std::stof(substr));
           break;
         case 3:
-          time.push_back(std::stof(substr));
+          max_reach_time_.push_back(std::stof(substr));
           break;
         }
       }
@@ -86,8 +67,9 @@ void Grasper::set_setpoints(const std::string path, const int index) {
   }
 
   for (int i = 0; i < 4; i++) {
-    std::cout << "Waypoint: " << i << ": (" << x_ref.at(i) << "," << y_ref.at(i)
-              << "," << z_ref.at(i) << ") time:" << time.at(i) << std::endl;
+    std::cout << "Waypoint: " << i << ": (" << x_setpoint_.at(i) << ","
+              << y_setpoint_.at(i) << "," << z_setpoint_.at(i)
+              << ") time:" << max_reach_time_.at(i) << std::endl;
   }
 
   csv_file.close();

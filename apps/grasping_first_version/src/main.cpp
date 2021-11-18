@@ -11,10 +11,10 @@
 int main() {
   Grasper grasper;
 
-  // grasper.set_parameters(paths::parameters_path);
-  grasper.set_setpoints(paths::setpoint_list_path, 2);
+  grasper.set_parameters(paths::parameters_path);
+  grasper.load_setpoints(paths::setpoint_list_path);
 
-  // bool status = grasper.go_to_pos();
+  bool status = grasper.go_to_pos(0);
 
   // std::cout << "Target status:" << status << std::endl;
 }

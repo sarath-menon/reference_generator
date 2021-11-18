@@ -36,10 +36,7 @@ public:
   DDSPublisher *position_pub;
 
   // parameter
-public:
-  // time to complete grasping manueuver
-  float max_reach_time_{};
-
+private:
   // controller sampling time in seconds
   float dt_{};
 
@@ -54,6 +51,12 @@ public:
   bool x_reach_flag{};
   bool y_reach_flag{};
   bool z_reach_flag{};
+
+  // Containers to store setpoints
+  std::vector<float> x_setpoint_;
+  std::vector<float> y_setpoint_;
+  std::vector<float> z_setpoint_;
+  std::vector<float> max_reach_time_;
 
 public:
   /// Getter function
@@ -72,14 +75,30 @@ public:
   const float &z_threshold() const { return z_threshold_; }
 
   /// Getter function
-  const float &max_reach_time() const { return max_reach_time_; }
+  const std::array<float, 3> &setpoint(const float index) const {
+
+    static std::array<float, 3> setpoint{};
+    setpoint[0] = x_setpoint_.at(index);
+    setpoint[1] = y_setpoint_.at(index);
+    setpoint[2] = z_setpoint_.at(index);
+
+    return setpoint;
+  }
+
+  /// Getter function
+  const float &max_reach_time(const float index) const {
+
+    static float max_reach_time{};
+    max_reach_time = max_reach_time_.at(index);
+    return max_reach_time;
+  }
 
 public:
   /// Setter function
-  bool go_to_pos();
+  bool go_to_pos(const int index);
 
 public:
   void set_parameters(const std::string path);
 
-  void set_setpoints(const std::string path, const int index);
+  void load_setpoints(const std::string path);
 };

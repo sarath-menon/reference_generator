@@ -1,7 +1,7 @@
 # Set position setpoints
 
 dt: 0.01 # [seconds]
-grasping_time: 5.0 # [seconds]
+max_reach_time: 5.0 # [seconds]
 
 xy_threshold: 0.2 #[meters]
 z_threshold: 0.2 #[meters]
