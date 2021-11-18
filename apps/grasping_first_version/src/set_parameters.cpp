@@ -8,6 +8,7 @@
 #include <vector>
 #include <yaml-cpp/yaml.h>
 
+// to set parameters from yaml file
 void Grasper::set_parameters(const std::string path) {
   // Safety check, see if file exists
   safety_checks::yaml_file_check(path);
@@ -25,6 +26,7 @@ void Grasper::set_parameters(const std::string path) {
   // Set target setpoints
 }
 
+// to load waypoints from csv file
 void Grasper::load_setpoints(const std::string path) {
   // Safety check, see if file exists
   safety_checks::yaml_file_check(path);
@@ -66,11 +68,11 @@ void Grasper::load_setpoints(const std::string path) {
     }
   }
 
-  for (int i = 0; i < 4; i++) {
-    std::cout << "Waypoint: " << i << ": (" << x_setpoint_.at(i) << ","
-              << y_setpoint_.at(i) << "," << z_setpoint_.at(i)
-              << ") time:" << max_reach_time_.at(i) << std::endl;
-  }
+  // for (int i = 0; i < 4; i++) {
+  //   std::cout << "Waypoint: " << i << ": (" << x_setpoint_.at(i) << ","
+  //             << y_setpoint_.at(i) << "," << z_setpoint_.at(i)
+  //             << ") time:" << max_reach_time_.at(i) << std::endl;
+  // }
 
   csv_file.close();
 }

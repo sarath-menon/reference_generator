@@ -66,9 +66,6 @@ bool Grasper::go_to_pos(const int index) {
     // std::cout << "Reached flags: " << x_reach_flag << '\t' << y_reach_flag
     //           << '\t' << z_reach_flag << std::endl;
 
-    std::cout << "Setpoint:" << setpoint(index).x << '\t' << setpoint(index).y
-              << '\t' << setpoint(index).z << std::endl;
-
     // exit if position has been reached
     if (x_reach_flag && y_reach_flag && z_reach_flag == true) {
       std::cout << "Target position has been reached";
@@ -76,16 +73,15 @@ bool Grasper::go_to_pos(const int index) {
       break;
     }
 
-    // Send positon cmd if positon not reach
+    // Send positon cmd if positon not reached
     else {
       // Set pos cmd
       quad_pos_cmd.position.x = setpoint(index).x;
       quad_pos_cmd.position.y = setpoint(index).y;
       quad_pos_cmd.position.z = setpoint(index).z;
 
-      // // Check whether position reached
-      // std::cout << "Desired position:" << desired_pos_.x << '\t'
-      //           << desired_pos_.y << '\t' << desired_pos_.z << std::endl;
+      std::cout << "Setpoint: " << setpoint(index).x << '\t'
+                << setpoint(index).y << '\t' << setpoint(index).z << std::endl;
 
       // position_pub->publish(quad_pos_cmd);
     }
