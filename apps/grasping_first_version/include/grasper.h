@@ -19,9 +19,6 @@ private:
   // Current state
   cpp_msg::Mocap current_pose_{};
 
-  // Current state
-  cpp_msg::Position desired_pos_{};
-
   // position cmd sent to quad
   cpp_msg::QuadPositionCmd quad_pos_cmd{};
 
@@ -63,9 +60,6 @@ public:
   const cpp_msg::Mocap &current_pose() const { return current_pose_; }
 
   /// Getter function
-  const cpp_msg::Position &desired_pos() const { return desired_pos_; }
-
-  /// Getter function
   const float &dt() const { return dt_; }
 
   /// Getter function
@@ -75,12 +69,12 @@ public:
   const float &z_threshold() const { return z_threshold_; }
 
   /// Getter function
-  const std::array<float, 3> &setpoint(const float index) const {
+  cpp_msg::Position &setpoint(const float index) const {
 
-    static std::array<float, 3> setpoint{};
-    setpoint[0] = x_setpoint_.at(index);
-    setpoint[1] = y_setpoint_.at(index);
-    setpoint[2] = z_setpoint_.at(index);
+    static cpp_msg::Position setpoint{};
+    setpoint.x = x_setpoint_.at(index);
+    setpoint.y = y_setpoint_.at(index);
+    setpoint.z = z_setpoint_.at(index);
 
     return setpoint;
   }

@@ -57,14 +57,17 @@ bool Grasper::go_to_pos(const int index) {
     //           << current_pose_.pose.position.z << std::endl;
 
     x_reach_flag = check_reached(current_pose_.pose.position.x,
-                                 setpoint(index)[0], xy_threshold_);
+                                 setpoint(index).x, xy_threshold_);
     y_reach_flag = check_reached(current_pose_.pose.position.y,
-                                 setpoint(index)[1], xy_threshold_);
+                                 setpoint(index).y, xy_threshold_);
     z_reach_flag = check_reached(current_pose_.pose.position.z,
-                                 setpoint(index)[2], z_threshold_);
+                                 setpoint(index).z, z_threshold_);
 
     // std::cout << "Reached flags: " << x_reach_flag << '\t' << y_reach_flag
     //           << '\t' << z_reach_flag << std::endl;
+
+    std::cout << "Setpoint:" << setpoint(index).x << '\t' << setpoint(index).y
+              << '\t' << setpoint(index).z << std::endl;
 
     // exit if position has been reached
     if (x_reach_flag && y_reach_flag && z_reach_flag == true) {
@@ -76,9 +79,9 @@ bool Grasper::go_to_pos(const int index) {
     // Send positon cmd if positon not reach
     else {
       // Set pos cmd
-      quad_pos_cmd.position.x = desired_pos_.x;
-      quad_pos_cmd.position.y = desired_pos_.y;
-      quad_pos_cmd.position.z = desired_pos_.z;
+      quad_pos_cmd.position.x = setpoint(index).x;
+      quad_pos_cmd.position.y = setpoint(index).y;
+      quad_pos_cmd.position.z = setpoint(index).z;
 
       // // Check whether position reached
       // std::cout << "Desired position:" << desired_pos_.x << '\t'
@@ -89,6 +92,6 @@ bool Grasper::go_to_pos(const int index) {
   }
 
   // If we reach here, then target coudln't be reached in specified time
-  std::cerr << "Target coudln't be reached in specified time";
+  std::cerr << "Setpoint couldn't be reached in given time limit of ";
   return false;
 }
