@@ -17,18 +17,24 @@ public:
   ~Grasper();
 
 private:
-  // Current state
+  // Quadcopter position
   cpp_msg::Mocap quad_pose_{};
 
-  // position cmd sent to quad
+  // Object position
   cpp_msg::QuadPositionCmd quad_pos_cmd{};
+
+  // Current state
+  cpp_msg::Mocap object_pose_{};
 
 public:
   // Create doamin participant
   std::unique_ptr<DefaultParticipant> dp;
 
-  // Motion capture data subscriber
-  DDSSubscriber<idl_msg::MocapPubSubType, cpp_msg::Mocap> *mocap_sub;
+  // quadcopter pose subscriber
+  DDSSubscriber<idl_msg::MocapPubSubType, cpp_msg::Mocap> *quad_sub;
+
+  // object pose subscriber
+  DDSSubscriber<idl_msg::MocapPubSubType, cpp_msg::Mocap> *object_sub;
 
   // Create publisher with msg type
   DDSPublisher *position_pub;
@@ -76,13 +82,15 @@ public:
   /// Getter function
   const float &z_threshold() const { return z_threshold_; }
 
-public:
+private:
   /// Setter function
   bool go_to_pos(const cpp_msg::Position &current_pos,
                  const cpp_msg::Position &target_pos,
                  const cpp_msg::Position &pos_thresholds, const float max_time);
 
+public:
   bool go_to_waypoint(const int index);
+  bool go_to_object(const std::string object, const float max_reach_time);
 
 public:
   void set_parameters(const std::string path);

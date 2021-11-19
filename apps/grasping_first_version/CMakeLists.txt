@@ -4,6 +4,7 @@ src/main.cpp
 src/grasper.cpp
 src/set_parameters.cpp
 src/go_to_pos.cpp
+src/go_to_object.cpp
 src/go_to_waypoint.cpp
 )
 
