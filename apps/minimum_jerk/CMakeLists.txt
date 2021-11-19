@@ -1,8 +1,6 @@
 
 add_executable(minimum_jerk 
 src/main.cpp
-src/RapidTrajectoryGenerator.cpp
-src/SingleAxisTrajectory.cpp
 )
 
 target_include_directories(minimum_jerk  PUBLIC include)
@@ -12,6 +10,7 @@ comm_lib
 fastcdr 
 fastrtps
 yaml-cpp
+mueller_lib
 )
 
 
