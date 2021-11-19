@@ -10,6 +10,15 @@ Grasper::muller_controller(const cpp_msg::Position &current_pos,
   // Define how gravity lies in our coordinate system
   static Vec3 gravity = Vec3(0, 0, -9.81); //[m/s**2]
 
+  // Duration
+  static float duration = 1.5;
+
+  // Initial and final accelerations always zero for now
+  static Vec3 vel0 = Vec3(0, 0, 0); // intiail velocity
+  static Vec3 acc0 = Vec3(0, 0, 0); // intial acceleration
+  static Vec3 velf = Vec3(0, 0, 0); // final velocity
+  static Vec3 accf = Vec3(0, 0, 0); // final acceleration
+
   // Define the trajectory starting state:
   Vec3 pos0 = Vec3(current_pos.x, current_pos.y,
                    current_pos.z); // position
@@ -18,18 +27,12 @@ Grasper::muller_controller(const cpp_msg::Position &current_pos,
   Vec3 posf = Vec3(target_pos.x, target_pos.y,
                    target_pos.z); // position
 
-  // Initial and final accelerations always zero for now
-  Vec3 vel0 = Vec3(0, 0, 0); // velocity
-  Vec3 acc0 = Vec3(0, 0, 0); // acceleration
-  Vec3 velf = Vec3(0, 0, 0); // velocity
-  Vec3 accf = Vec3(0, 0, 0);
-
   // Generate trajectory
   RapidTrajectoryGenerator traj(pos0, vel0, acc0, gravity);
   traj.SetGoalPosition(posf);
   traj.SetGoalVelocity(velf);
   traj.SetGoalAcceleration(accf);
-  traj.Generate(max_time);
+  traj.Generate(duration);
 
   // set target position
   cpp_msg::Position pos_setpoint;

@@ -8,9 +8,9 @@
 
 // angle in radians
 float theta = 0;
-float theta_dot=0.5;
+float theta_dot = 0.5;
 constexpr static float dt = 0.1;
-constexpr static int dt_ms = dt*1000;
+constexpr static int dt_ms = dt * 1000;
 constexpr static float a = 1.5;
 
 // Radius of circle to be tracked (in meters)
@@ -49,19 +49,18 @@ int main() {
 
   // // Delay for quad to catch up
   std::this_thread::sleep_for(std::chrono::seconds(5));
-  int i_max =(2*M_PI)/(theta_dot*dt);
-  constexpr static int circles_number = 1;
 
   // for (int i = 0; i < i_max * 2; i++) {
-  for (;;){//(int i = 0; i < i_max * circles_number; i++) {
+  for (;;) { //(int i = 0; i < i_max * circles_number; i++) {
 
-    //position control
-    pos_msg.position.x=(a*cos(theta))/(1.0+pow(sin(theta),2));
-    pos_msg.position.y=(a*cos(theta)*sin(theta))/(1.0+pow(sin(theta),2));
-    //pz=0;
+    // position control
+    pos_msg.position.x = (a * cos(theta)) / (1.0 + pow(sin(theta), 2));
+    pos_msg.position.y =
+        (a * cos(theta) * sin(theta)) / (1.0 + pow(sin(theta), 2));
+    // pz=0;
 
-    //incrementing theta
-    theta += theta_dot*dt;
+    // incrementing theta
+    theta += theta_dot * dt;
 
     // Delay for quad to catch up
     std::this_thread::sleep_for(std::chrono::milliseconds(dt_ms));

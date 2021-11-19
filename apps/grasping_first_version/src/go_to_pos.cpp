@@ -43,12 +43,13 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
       case ctrl_type::mueller:
         quad_pos_cmd.position =
             muller_controller(current_pos, target_pos, max_time, dt_);
+        break;
 
       default:
         exit(0);
       }
 
-      // Publish pos cmd
+      // // Publish pos cmd
       position_pub->publish(quad_pos_cmd);
 
       std::cout << "Setpoint: " << target_pos.x << '\t' << target_pos.y << '\t'
