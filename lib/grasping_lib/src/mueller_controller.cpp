@@ -27,12 +27,6 @@ Grasper::muller_controller(const cpp_msg::Position &current_pos,
   Vec3 posf = Vec3(target_pos.x, target_pos.y,
                    target_pos.z); // position
 
-  // // Define the trajectory starting state:
-  // Vec3 pos0 = Vec3(1, 1, 1); // position
-
-  // // define the goal state:
-  // Vec3 posf = Vec3(2, 2, 2); // position
-
   // Generate trajectory
   RapidTrajectoryGenerator traj(pos0, vel0, acc0, gravity);
   traj.SetGoalPosition(posf);

@@ -35,8 +35,6 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
 
       case ctrl_type::px4:
         quad_pos_cmd.position = target_pos;
-        //  Delay for quad to catch up
-        std::this_thread::sleep_for(std::chrono::milliseconds(delay_time_));
         break;
 
       case ctrl_type::mueller:
@@ -50,6 +48,11 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
 
       // // Publish pos cmd
       position_pub->publish(quad_pos_cmd);
+
+      //  Delay for quad to catch up
+      std::this_thread::sleep_for(std::chrono::milliseconds(delay_time_));
+
+      // std::cout << "time:" << t_counter << std::endl;
 
       // Logging to console for debugging
       //////////////////////////////////////////////////////////////////////////////////////
