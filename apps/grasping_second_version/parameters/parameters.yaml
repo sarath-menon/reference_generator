@@ -1,9 +1,0 @@
-# Set position setpoints
-
-dt: 0.02 # [seconds]
-max_reach_time: 5.0 # [seconds]
-
-xy_threshold: 0.2 #[meters]
-z_threshold: 0.2 #[meters]
-
-object_name: "srl_box" #name of object to be grasped
