@@ -56,7 +56,7 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
 
       // Logging to console for debugging
       //////////////////////////////////////////////////////////////////////////////////////
-      // // // Check whether position reached
+      // // Check whether position reached
       // std::cout << "quad pose:" << current_pos.x << '\t' << current_pos.y
       //           << '\t' << current_pos.z << std::endl;
 
@@ -64,8 +64,10 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
       //           << quad_pos_cmd.position.y << '\t' << quad_pos_cmd.position.z
       //           << std::endl;
 
-      std::cout << "pos setpoint:" << target_pos.x << '\t' << target_pos.y
-                << '\t' << target_pos.z << std::endl;
+      // std::cout << "pos setpoint:" << target_pos.x << '\t' << target_pos.y
+      //           << '\t' << target_pos.z << std::endl;
+
+      // std::cout << std::endl;
     }
   }
 
