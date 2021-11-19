@@ -31,11 +31,9 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
     // Send positon cmd if position not reached
     else {
       // Set pos cmd
-      quad_pos_cmd.position.x = target_pos.x;
-      quad_pos_cmd.position.y = target_pos.y;
-      quad_pos_cmd.position.z = target_pos.z;
+      quad_pos_cmd.position = target_pos;
 
-      // position_pub->publish(quad_pos_cmd);
+      position_pub->publish(quad_pos_cmd);
 
       //  Delay for quad to catch up
       std::this_thread::sleep_for(std::chrono::milliseconds(delay_time_));

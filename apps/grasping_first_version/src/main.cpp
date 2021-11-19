@@ -17,9 +17,9 @@ int main() {
   bool result = grasper.go_to_waypoint(0);
   result = grasper.go_to_waypoint(1);
   result = grasper.go_to_waypoint(2);
-  result = grasper.go_to_waypoint(3);
 
   // Delay for grasping
+  result = grasper.go_to_object("srl_quad", 10);
   std::this_thread::sleep_for(std::chrono::seconds(2));
 
   result = grasper.go_to_waypoint(4);

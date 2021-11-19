@@ -88,6 +88,10 @@ private:
                  const cpp_msg::Position &target_pos,
                  const cpp_msg::Position &pos_thresholds, const float max_time);
 
+  cpp_msg::Position muller_controller(const cpp_msg::Position &current_pos,
+                                      const cpp_msg::Position &target_pos,
+                                      const float max_time, const float dt);
+
 public:
   bool go_to_waypoint(const int index);
   bool go_to_object(const std::string object, const float max_reach_time);
