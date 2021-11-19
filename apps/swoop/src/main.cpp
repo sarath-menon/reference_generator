@@ -18,17 +18,12 @@ int main() {
   grasper.load_waypoints(paths::waypoints_path);
   bool result{};
 
-  // // Track waypoints
-  // result = grasper.go_to_waypoint(0, px4_ctrl);
-  // result = grasper.go_to_waypoint(1, px4_ctrl);
-  // result = grasper.go_to_waypoint(2, px4_ctrl);
-  // result = grasper.go_to_waypoint(3, px4_ctrl);
-
   // Track waypoints
-  result = grasper.go_to_waypoint(0, mueller_ctrl);
-  result = grasper.go_to_waypoint(1, mueller_ctrl);
-  result = grasper.go_to_waypoint(2, mueller_ctrl);
-  result = grasper.go_to_waypoint(3, mueller_ctrl);
+  result = grasper.go_to_waypoint(0, px4_ctrl);
+  result = grasper.go_to_waypoint(1, px4_ctrl);
+  result = grasper.go_to_waypoint(2, px4_ctrl);
 
-  // std::cout << "Target status:" << status << std::endl;
+  // // Track waypoints
+  // result = grasper.go_to_waypoint(0, mueller_ctrl);
+  // result = grasper.go_to_waypoint(1, mueller_ctrl);
 }

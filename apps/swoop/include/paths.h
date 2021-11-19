@@ -7,8 +7,7 @@ namespace paths {
 
 std::filesystem::path folder_path = std::filesystem::current_path();
 
-const std::string abs_path =
-    folder_path.u8string() + "/apps/minimum_jerk_new/parameters/";
+const std::string abs_path = folder_path.u8string() + "/apps/swoop/parameters/";
 
 const std::string waypoints_path = abs_path + "waypoints.csv";
 
