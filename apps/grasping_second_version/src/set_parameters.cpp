@@ -11,6 +11,7 @@
 // to set parameters from yaml file
 void Grasper::set_parameters(const std::string path) {
   // Safety check, see if file exists
+  //std::cout<<"iam here";
   safety_checks::yaml_file_check(path);
 
   // Load yaml file containing gains

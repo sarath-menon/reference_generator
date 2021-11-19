@@ -106,7 +106,9 @@ public:
   bool go_to_pos(const int index);
 
   bool go_near_object(const float x_ref, const float y_ref, const float z_ref,
-                      const float time);
+                      const float time, const bool pos_flag);
+
+  bool departure(const float z_ref, const float time, const bool pos_flag);
 
 public:
   void set_parameters(const std::string path);

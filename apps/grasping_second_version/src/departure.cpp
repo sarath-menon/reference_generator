@@ -1,13 +1,13 @@
 #include "grasper.h"
 
-bool Grasper::go_near_object(const float x_ref, const float y_ref,
-                             const float z_ref, const float time, const bool pos_flag) {
+bool Grasper::departure(const float z_ref, const float time, const bool pos_flag) {
 
   // Compensate for positon offset
   //object_pose_.pose.position.x += x_ref;
   //object_pose_.pose.position.y += y_ref;
   //object_pose_.pose.position.z += z_ref;
-
+  const float x_pickup = object_pose_.pose.position.x;
+  const float y_pickup = object_pose_.pose.position.y;
   //object_pose_.pose.position.y *= -1.0;
 
   // time counter
@@ -32,15 +32,15 @@ bool Grasper::go_near_object(const float x_ref, const float y_ref,
     //           << object_pose_.pose.position.z << std::endl;
 
     x_reach_flag = check_reached(quad_pose_.pose.position.x,
-                                 object_pose_.pose.position.x+x_ref, xy_threshold_);
+                                 x_pickup, xy_threshold_);
     // * (-1.0) because of different coordinates
     // (mocap_pose and setpoint)
     y_reach_flag =
         check_reached(quad_pose_.pose.position.y,
-                      object_pose_.pose.position.y+y_ref, xy_threshold_);
+                      y_pickup, xy_threshold_);
 
     z_reach_flag = check_reached(quad_pose_.pose.position.z,
-                                 object_pose_.pose.position.z+z_ref, z_threshold_);
+                                 z_ref, z_threshold_);
 
     // exit if position has been reached
     if (pos_flag && x_reach_flag && y_reach_flag && z_reach_flag == true) {
@@ -53,9 +53,9 @@ bool Grasper::go_near_object(const float x_ref, const float y_ref,
     else {
 
       // Set pos cmd
-      quad_pos_cmd.position.x = (object_pose_.pose.position.x+x_ref) - x_offset;
-      quad_pos_cmd.position.y = -(object_pose_.pose.position.y+y_ref) - y_offset;
-      quad_pos_cmd.position.z = object_pose_.pose.position.z+z_ref;
+      quad_pos_cmd.position.x = (x_pickup) - x_offset;
+      quad_pos_cmd.position.y = -(y_pickup) - y_offset;
+      quad_pos_cmd.position.z = z_ref;
 
       // std::cout << "Setpoint: " <<
       // setpoint(index).x << '\t'
