@@ -9,24 +9,8 @@
 #include <cstdlib>
 #include <future>
 
-// acceleration
-
-// define the duration:
-double Tf = 1.0;
-
-double f_min = 5;         //[m/s**2]
-double f_max = 25;        //[m/s**2]
-double wmax = 20;         //[rad/s]
-double minTimeSec = 0.02; //[s]
-
 // Define how gravity lies in our coordinate system
 Vec3 gravity = Vec3(0, 0, -9.81); //[m/s**2]
-
-// Define the state constraints. We'll only check that we don't fly into the
-// floor:
-Vec3 floorPos = Vec3(0, 0, 0); // any point on the boundary
-Vec3 floorNormal =
-    Vec3(0, 0, 1); // we want to be in this direction of the boundary
 
 int main() {
 
@@ -34,22 +18,22 @@ int main() {
   set_parameters(paths::setpoint_path);
 
   // Define the trajectory starting state:
-  Vec3 pos0 = Vec3(parameters::x_start, parameters::y_start,
-                   parameters::z_start); // position
-  Vec3 vel0 = Vec3(0, 0, 0);             // velocity
-  Vec3 acc0 = Vec3(0, 0, 0);             // acceleration
+  Vec3 pos0 = Vec3(params::x_start, params::y_start,
+                   params::z_start); // position
+  Vec3 vel0 = Vec3(0, 0, 0);         // velocity
+  Vec3 acc0 = Vec3(0, 0, 0);         // acceleration
 
   // define the goal state:
-  Vec3 posf = Vec3(parameters::x_mid, parameters::y_mid,
-                   parameters::z_mid); // position
-  Vec3 velf = Vec3(0, 0, 0);           // velocity
+  Vec3 posf = Vec3(params::x_mid, params::y_mid,
+                   params::z_mid); // position
+  Vec3 velf = Vec3(0, 0, 0);       // velocity
   Vec3 accf = Vec3(0, 0, 0);
 
   // Generate trajectory
   RapidTrajectoryGenerator traj_1(pos0, vel0, acc0, gravity);
 
   // seconds to milliseconds
-  const int delay_time = parameters::dt * 1000;
+  const int delay_time = params::dt * 1000;
 
   // Quadcopter position msg
   cpp_msg::QuadPositionCmd pos_cmd{};
@@ -68,12 +52,12 @@ int main() {
   traj_1.SetGoalPosition(posf);
   traj_1.SetGoalVelocity(velf);
   traj_1.SetGoalAcceleration(accf);
-  traj_1.Generate(Tf);
+  traj_1.Generate(params::duration);
 
   // Set position
-  pos_cmd.position.x = parameters::x_start;
-  pos_cmd.position.y = parameters::y_start;
-  pos_cmd.position.z = parameters::z_start;
+  pos_cmd.position.x = params::x_start;
+  pos_cmd.position.y = params::y_start;
+  pos_cmd.position.z = params::z_start;
 
   // Publish command
   position_pub.publish(pos_cmd);
@@ -83,7 +67,7 @@ int main() {
 
   std::cout << "Starting swooping";
 
-  for (double i = 0; i < Tf; i += parameters::dt) {
+  for (double i = 0; i < params::duration; i += params::dt) {
     // Set position
     pos_cmd.position.x = traj_1.GetPosition(i).x;
     pos_cmd.position.y = traj_1.GetPosition(i).y;
@@ -117,15 +101,15 @@ int main() {
   //////////////////////////////////////////////////////////////////
   // Swoop second part
   // Define the trajectory starting state:
-  pos0 = Vec3(parameters::x_mid, parameters::y_mid,
-              parameters::z_mid); // position
-  vel0 = Vec3(0, 0, 0);           // velocity
-  acc0 = Vec3(0, 0, 0);           // acceleration
+  pos0 = Vec3(params::x_mid, params::y_mid,
+              params::z_mid); // position
+  vel0 = Vec3(0, 0, 0);       // velocity
+  acc0 = Vec3(0, 0, 0);       // acceleration
 
   // define the goal state:
-  posf = Vec3(parameters::x_final, parameters::y_final,
-              parameters::z_final); // position
-  velf = Vec3(0, 0, 0);             // velocity
+  posf = Vec3(params::x_final, params::y_final,
+              params::z_final); // position
+  velf = Vec3(0, 0, 0);         // velocity
   accf = Vec3(0, 0, 0);
 
   // Generate trajectory
@@ -135,9 +119,9 @@ int main() {
   traj_2.SetGoalPosition(posf);
   traj_2.SetGoalVelocity(velf);
   traj_2.SetGoalAcceleration(accf);
-  traj_2.Generate(Tf);
+  traj_2.Generate(params::duration);
 
-  for (double i = 0; i < Tf; i += parameters::dt) {
+  for (double i = 0; i < params::duration; i += params::dt) {
     // Set position
     pos_cmd.position.x = traj_2.GetPosition(i).x;
     pos_cmd.position.y = traj_2.GetPosition(i).y;

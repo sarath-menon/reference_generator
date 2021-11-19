@@ -1,6 +1,6 @@
 #pragma once
 
-namespace parameters {
+namespace params {
 
 float x_start{};
 float y_start{};
@@ -18,4 +18,6 @@ float mid_velocity{};
 
 float dt{};
 
-} // namespace parameters
+float duration{};
+
+} // namespace params
