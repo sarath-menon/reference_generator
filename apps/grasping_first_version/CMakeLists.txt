@@ -3,6 +3,8 @@ add_executable(grasping_first_version
 src/main.cpp
 src/grasper.cpp
 src/set_parameters.cpp
+src/go_to_pos.cpp
+src/go_to_waypoint.cpp
 )
 
 target_include_directories(grasping_first_version PUBLIC include)

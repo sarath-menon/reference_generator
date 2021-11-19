@@ -12,19 +12,18 @@ int main() {
   Grasper grasper;
 
   grasper.set_parameters(paths::parameters_path);
-  grasper.load_setpoints(paths::setpoint_list_path);
+  grasper.load_waypoints(paths::waypoint_list_path);
 
-  bool result = grasper.go_to_pos(0);
-  result = grasper.go_to_pos(1);
-  result = grasper.go_to_pos(2);
-  result = grasper.go_to_pos(3);
+  bool result = grasper.go_to_waypoint(0);
+  result = grasper.go_to_waypoint(1);
+  result = grasper.go_to_waypoint(2);
+  result = grasper.go_to_waypoint(3);
 
   // Delay for grasping
-  //  Delay for quad to catch up
   std::this_thread::sleep_for(std::chrono::seconds(2));
 
-  result = grasper.go_to_pos(4);
-  result = grasper.go_to_pos(5);
+  result = grasper.go_to_waypoint(4);
+  result = grasper.go_to_waypoint(5);
 
   // std::cout << "Target status:" << status << std::endl;
 }

@@ -15,16 +15,10 @@ bool Grasper::go_to_pos(const int index) {
     //  Delay for quad to catch up
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time_));
 
-    // offset due to position interface
-    constexpr static float x_offset = 0.5;
-    constexpr static float y_offset = 0.5;
-
-    x_reach_flag = check_reached(quad_pose_.pose.position.x,
-                                 setpoint(index).x + x_offset, xy_threshold_);
-    // * (-1.0) because of different coordinates (mocap_pose and setpoint)
-    y_reach_flag =
-        check_reached(quad_pose_.pose.position.y,
-                      (setpoint(index).y + y_offset) * (-1.0), xy_threshold_);
+    x_reach_flag = check_reached(quad_pose_.pose.position.x, setpoint(index).x,
+                                 xy_threshold_);
+    y_reach_flag = check_reached(quad_pose_.pose.position.y, setpoint(index).y,
+                                 xy_threshold_);
     z_reach_flag = check_reached(quad_pose_.pose.position.z, setpoint(index).z,
                                  z_threshold_);
 

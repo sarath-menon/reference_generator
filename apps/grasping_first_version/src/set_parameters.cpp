@@ -14,20 +14,21 @@ void Grasper::set_parameters(const std::string path) {
   safety_checks::yaml_file_check(path);
 
   // Load yaml file containing gains
-  YAML::Node setpoint_yaml = YAML::LoadFile(path);
+  YAML::Node waypoint_yaml = YAML::LoadFile(path);
 
-  // Set setpoints
-  dt_ = setpoint_yaml["dt"].as<float>();
+  // Set waypoints
+  dt_ = waypoint_yaml["dt"].as<float>();
   delay_time_ = int(dt_ * 1000);
 
-  xy_threshold_ = setpoint_yaml["xy_threshold"].as<float>();
-  z_threshold_ = setpoint_yaml["z_threshold"].as<float>();
+  pos_thresholds_.x = waypoint_yaml["x_threshold"].as<float>();
+  pos_thresholds_.y = waypoint_yaml["y_threshold"].as<float>();
+  pos_thresholds_.z = waypoint_yaml["z_threshold"].as<float>();
 
-  // Set target setpoints
+  // Set target waypoints
 }
 
 // to load waypoints from csv file
-void Grasper::load_setpoints(const std::string path) {
+void Grasper::load_waypoints(const std::string path) {
   // Safety check, see if file exists
   safety_checks::yaml_file_check(path);
 
@@ -52,13 +53,13 @@ void Grasper::load_setpoints(const std::string path) {
 
         switch (i) {
         case 0:
-          x_setpoint_.push_back(std::stof(substr));
+          x_waypoint_.push_back(std::stof(substr));
           break;
         case 1:
-          y_setpoint_.push_back(std::stof(substr));
+          y_waypoint_.push_back(std::stof(substr));
           break;
         case 2:
-          z_setpoint_.push_back(std::stof(substr));
+          z_waypoint_.push_back(std::stof(substr));
           break;
         case 3:
           max_reach_time_.push_back(std::stof(substr));
@@ -69,8 +70,8 @@ void Grasper::load_setpoints(const std::string path) {
   }
 
   // for (int i = 0; i < 4; i++) {
-  //   std::cout << "Waypoint: " << i << ": (" << x_setpoint_.at(i) << ","
-  //             << y_setpoint_.at(i) << "," << z_setpoint_.at(i)
+  //   std::cout << "Waypoint: " << i << ": (" << x_waypoint_.at(i) << ","
+  //             << y_waypoint_.at(i) << "," << z_waypoint_.at(i)
   //             << ") time:" << max_reach_time_.at(i) << std::endl;
   // }
 

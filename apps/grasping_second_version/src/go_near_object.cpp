@@ -19,10 +19,6 @@ bool Grasper::go_near_object(const float x_ref, const float y_ref,
     //  Delay for quad to catch up
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time_));
 
-    // offset due to position interface
-    constexpr static float x_offset = 0.5;
-    constexpr static float y_offset = 0.5;
-
     // // Check whether position reached
     // std::cout << "quad pose:" << quad_pose_.pose.position.x << '\t'
     //           << quad_pose_.pose.position.y << '\t'
@@ -33,11 +29,9 @@ bool Grasper::go_near_object(const float x_ref, const float y_ref,
 
     x_reach_flag = check_reached(quad_pose_.pose.position.x,
                                  object_pose_.pose.position.x, xy_threshold_);
-    // * (-1.0) because of different coordinates
-    // (mocap_pose and setpoint)
-    y_reach_flag =
-        check_reached(quad_pose_.pose.position.y,
-                      (object_pose_.pose.position.y) * (-1.0), xy_threshold_);
+
+    y_reach_flag = check_reached(quad_pose_.pose.position.y,
+                                 object_pose_.pose.position.y, xy_threshold_);
 
     z_reach_flag = check_reached(quad_pose_.pose.position.z,
                                  object_pose_.pose.position.z, z_threshold_);
@@ -51,10 +45,9 @@ bool Grasper::go_near_object(const float x_ref, const float y_ref,
 
     // Send positon cmd if positon not reached
     else {
-
       // Set pos cmd
-      quad_pos_cmd.position.x = object_pose_.pose.position.x - x_offset;
-      quad_pos_cmd.position.y = object_pose_.pose.position.y - y_offset;
+      quad_pos_cmd.position.x = object_pose_.pose.position.x;
+      quad_pos_cmd.position.y = object_pose_.pose.position.y;
       quad_pos_cmd.position.z = object_pose_.pose.position.z;
 
       // std::cout << "Setpoint: " <<
