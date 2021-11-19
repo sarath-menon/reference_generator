@@ -18,7 +18,7 @@ bool Grasper::go_over_object(const std::string object, const float height,
 
     return status;
   } else {
-    std::cout << " srl box object not available" << std::endl;
+    std::cout << object << " object not available" << std::endl;
     return false;
   }
 }

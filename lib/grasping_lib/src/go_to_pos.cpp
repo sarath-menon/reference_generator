@@ -31,7 +31,6 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
     // Send positon cmd if position not reached
     else {
       // Set pos cmd
-
       switch (type) {
 
       case ctrl_type::px4:

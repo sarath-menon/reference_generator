@@ -6,6 +6,5 @@ add_subdirectory(go_to_position)
 add_subdirectory(minimum_jerk)
 add_subdirectory(minimum_jerk_new)
 add_subdirectory(go_down)
-add_subdirectory(grasping_lib)
 add_subdirectory(grasp_object)
-add_subdirectory(mueller_controller)
+ 
