@@ -13,20 +13,8 @@ constexpr static float dt = 0.1;
 constexpr static int dt_ms = dt * 1000;
 constexpr static float a = 1.5;
 
-// Radius of circle to be tracked (in meters)
-constexpr static float radius = 0.5;
-
-// Local center
-constexpr static float center_x = 0;
-constexpr static float center_y = 0;
-
 // constant altitude
 constexpr static float const_altitude = 1.5;
-
-// //starting position
-// float px=2*a;
-// float py=0;
-// float pz=0;
 
 int main() {
   // Quadcopter position msg
@@ -47,17 +35,16 @@ int main() {
   pos_msg.position.x = a;
   position_pub.publish(pos_msg);
 
-  // // Delay for quad to catch up
+  // Delay for quad to catch up
   std::this_thread::sleep_for(std::chrono::seconds(5));
 
-  // for (int i = 0; i < i_max * 2; i++) {
-  for (;;) { //(int i = 0; i < i_max * circles_number; i++) {
+  // Start lemniscate
+  for (;;) {
 
     // position control
     pos_msg.position.x = (a * cos(theta)) / (1.0 + pow(sin(theta), 2));
     pos_msg.position.y =
         (a * cos(theta) * sin(theta)) / (1.0 + pow(sin(theta), 2));
-    // pz=0;
 
     // incrementing theta
     theta += theta_dot * dt;
