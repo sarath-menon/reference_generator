@@ -25,7 +25,7 @@ int main() {
   // Step 2: grasp object
   // argument: object name, max allowed time
   result = grasper.go_over_object("srl_box", 1.5, px4_ctrl);
-  std::this_thread::sleep_for(std::chrono::seconds(2));
+  // std::this_thread::sleep_for(std::chrono::seconds(2));
 
   // step 3: drop off object
   result = grasper.go_to_waypoint(5, mueller_ctrl);

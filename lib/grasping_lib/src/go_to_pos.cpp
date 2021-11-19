@@ -48,11 +48,19 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
         exit(0);
       }
 
-      // // Publish pos cmd
-      position_pub->publish(quad_pos_cmd);
+      // // // Publish pos cmd
+      // position_pub->publish(quad_pos_cmd);
 
-      std::cout << "Setpoint: " << target_pos.x << '\t' << target_pos.y << '\t'
-                << target_pos.z << std::endl;
+      // // // Check whether position reached
+      // std::cout << "quad pose:" << current_pos.x << '\t' << current_pos.y
+      //           << '\t' << current_pos.z << std::endl;
+
+      // std::cout << "quad cmd:" << quad_pos_cmd.position.x << '\t'
+      //           << quad_pos_cmd.position.y << '\t' << quad_pos_cmd.position.z
+      //           << std::endl;
+
+      std::cout << "pos setpoint:" << target_pos.x << '\t' << target_pos.y
+                << '\t' << target_pos.z << std::endl;
     }
   }
 
