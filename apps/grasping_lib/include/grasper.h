@@ -104,7 +104,13 @@ private:
 
 public:
   bool go_to_waypoint(const int index, const ctrl_type type);
-  bool go_to_object(const std::string object, const ctrl_type type);
+  bool go_to_waypoint(const cpp_msg::Position waypoint,
+                      const float max_reach_time, const ctrl_type type);
+
+  bool go_over_object(const std::string object, const float height,
+                      const ctrl_type type);
+
+  bool grasp_object(const std::string object, const ctrl_type type);
 
 public:
   void set_parameters(const std::string path);

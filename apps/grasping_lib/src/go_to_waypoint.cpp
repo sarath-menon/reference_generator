@@ -17,3 +17,13 @@ bool Grasper::go_to_waypoint(const int index, const ctrl_type type) {
 
   return status;
 }
+
+bool Grasper::go_to_waypoint(const cpp_msg::Position waypoint,
+                             const float max_reach_time, const ctrl_type type) {
+
+  // Intiailize position waypoints
+  bool status = go_to_pos(quad_pose_.pose.position, waypoint, pos_thresholds_,
+                          max_reach_time, type);
+
+  return status;
+}
