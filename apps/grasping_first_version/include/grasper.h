@@ -96,15 +96,15 @@ private:
   bool go_to_pos(const cpp_msg::Position &current_pos,
                  const cpp_msg::Position &target_pos,
                  const cpp_msg::Position &pos_thresholds, const float max_time,
-                 ctrl_type type);
+                 const ctrl_type type);
 
   cpp_msg::Position muller_controller(const cpp_msg::Position &current_pos,
                                       const cpp_msg::Position &target_pos,
                                       const float max_time, const float dt);
 
 public:
-  bool go_to_waypoint(const int index, ctrl_type type);
-  bool go_to_object(const std::string object, ctrl_type type);
+  bool go_to_waypoint(const int index, const ctrl_type type);
+  bool go_to_object(const std::string object, const ctrl_type type);
 
 public:
   void set_parameters(const std::string path);

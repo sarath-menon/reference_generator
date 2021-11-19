@@ -1,7 +1,7 @@
 #include "grasper.h"
 
 /// Setter function
-bool Grasper::go_to_waypoint(const int index, ctrl_type type) {
+bool Grasper::go_to_waypoint(const int index, const ctrl_type type) {
 
   static cpp_msg::Position waypoint{};
   waypoint.x = x_waypoint_.at(index);

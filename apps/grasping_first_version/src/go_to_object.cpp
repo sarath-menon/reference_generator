@@ -1,7 +1,7 @@
 #include "grasper.h"
 
 /// Setter function
-bool Grasper::go_to_object(const std::string object, ctrl_type type) {
+bool Grasper::go_to_object(const std::string object, const ctrl_type type) {
 
   // check object name
   if (object_pose_.header.id.compare("srl_object") == 0) {
