@@ -24,7 +24,7 @@ void Grasper::set_parameters(const std::string path) {
   pos_thresholds_.y = waypoint_yaml["y_threshold"].as<float>();
   pos_thresholds_.z = waypoint_yaml["z_threshold"].as<float>();
 
-  // Set target waypoints
+  max_grasp_time_ = waypoint_yaml["max_grasp_time"].as<float>();
 }
 
 // to load waypoints from csv file

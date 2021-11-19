@@ -1,8 +1,7 @@
 #include "grasper.h"
 
 /// Setter function
-bool Grasper::go_to_object(const std::string object,
-                           const float max_reach_time) {
+bool Grasper::go_to_object(const std::string object, ctrl_type type) {
 
   // check object name
   if (object_pose_.header.id.compare("srl_object") == 0) {
@@ -10,7 +9,7 @@ bool Grasper::go_to_object(const std::string object,
     // Intiailize position targets
     bool status =
         go_to_pos(quad_pose_.pose.position, object_pose_.pose.position,
-                  pos_thresholds_, max_reach_time);
+                  pos_thresholds_, max_grasp_time_, type);
 
     return status;
   } else {

@@ -66,6 +66,9 @@ private:
   // Positions limits to attain to be consodered reached
   cpp_msg::Position pos_thresholds_;
 
+  // maximum time allowed for grasping
+  float max_grasp_time_{};
+
 public:
   /// Getter function
   const cpp_msg::Mocap &current_pose() const { return quad_pose_; }
@@ -82,19 +85,26 @@ public:
   /// Getter function
   const float &z_threshold() const { return z_threshold_; }
 
+  /// Getter function
+  const float &max_grasp_time() const { return max_grasp_time_; }
+
+public:
+  enum class ctrl_type { px4, mueller };
+
 private:
   /// Setter function
   bool go_to_pos(const cpp_msg::Position &current_pos,
                  const cpp_msg::Position &target_pos,
-                 const cpp_msg::Position &pos_thresholds, const float max_time);
+                 const cpp_msg::Position &pos_thresholds, const float max_time,
+                 ctrl_type type);
 
   cpp_msg::Position muller_controller(const cpp_msg::Position &current_pos,
                                       const cpp_msg::Position &target_pos,
                                       const float max_time, const float dt);
 
 public:
-  bool go_to_waypoint(const int index);
-  bool go_to_object(const std::string object, const float max_reach_time);
+  bool go_to_waypoint(const int index, ctrl_type type);
+  bool go_to_object(const std::string object, ctrl_type type);
 
 public:
   void set_parameters(const std::string path);

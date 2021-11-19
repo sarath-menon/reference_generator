@@ -5,3 +5,5 @@ dt: 0.02 # [seconds]
 x_threshold: 0.2 #[meters]
 y_threshold: 0.2 #[meters]
 z_threshold: 0.2 #[meters]
+
+max_grasp_time: 10

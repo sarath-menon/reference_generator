@@ -4,7 +4,7 @@
 bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
                         const cpp_msg::Position &target_pos,
                         const cpp_msg::Position &pos_thresholds,
-                        const float max_time) {
+                        const float max_time, ctrl_type type) {
 
   // initialize time counter
   float t_counter{};
