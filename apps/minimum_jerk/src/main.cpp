@@ -1,7 +1,7 @@
 #include "QuadPositionCmdPubSubTypes.h"
 #include "default_participant.h"
 #include "default_publisher.h"
-#include "helper.h"
+#include "mueller_helper.h"
 #include "paths.h"
 #include "quadcopter_msgs/msgs/QuadPositionCmd.h"
 #include "set_parameters.h"
@@ -149,8 +149,8 @@ int main() {
     // traj_2.GetPosition(i).z
     //           << std::endl;
 
-  // Publish command
-  position_pub.publish(pos_cmd);
+    // Publish command
+    position_pub.publish(pos_cmd);
 
     // Delay for quad to catch up
     std::this_thread::sleep_for(std::chrono::milliseconds(delay_time));
