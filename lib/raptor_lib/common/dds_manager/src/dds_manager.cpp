@@ -1,6 +1,6 @@
-#include "FlightManager.h"
+#include "dds_manager.h"
 
-FlightManager::FlightManager() {
+DDSManager::DDSManager() {
   // Fastdds
   // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
 

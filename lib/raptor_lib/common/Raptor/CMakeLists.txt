@@ -1,6 +1,6 @@
 
 add_library(raptor
-src/Raptor.cpp
+src/raptor.cpp
 )
 
 target_include_directories(raptor PUBLIC include)

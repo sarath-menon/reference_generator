@@ -1,6 +1,7 @@
 
 add_library(flight_manager
-src/FlightManager.cpp
+src/flight_manager.cpp
+src/set_values.cpp
 )
 
 target_include_directories(flight_manager PUBLIC include)

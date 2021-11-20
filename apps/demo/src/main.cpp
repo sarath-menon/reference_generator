@@ -1,10 +1,10 @@
 
-#include "FlightManager.h"
-#include "Raptor.h"
+#include "dds_manager.h"
+#include "raptor.h"
 
 int main() {
 
-  Raptor raptor_1(FM.particiant());
+  Raptor raptor_1(DDS.particiant());
 
   // shorter enumerations for convenience
 

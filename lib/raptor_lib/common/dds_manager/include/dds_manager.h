@@ -11,11 +11,11 @@
 #include <cmath>
 #include <cstring>
 
-class FlightManager {
+class DDSManager {
 
 public:
-  FlightManager();
-  ~FlightManager(){};
+  DDSManager();
+  ~DDSManager(){};
 
 private:
   // Create doamin participant
@@ -25,4 +25,4 @@ public:
   /// Getter function
   auto particiant() { return dp->participant(); }
 
-} inline FM;
+} inline DDS;
