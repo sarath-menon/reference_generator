@@ -1,12 +1,6 @@
-#include "QuadPositionCmdPubSubTypes.h"
-#include "default_participant.h"
-#include "default_publisher.h"
+
 #include "grasper.h"
 #include "paths.h"
-#include "quadcopter_msgs/msgs/QuadPositionCmd.h"
-#include <chrono>
-#include <cstdlib>
-#include <future>
 
 int main() {
   Grasper grasper;

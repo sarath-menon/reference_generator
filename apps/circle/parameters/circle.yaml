@@ -1,0 +1,17 @@
+# Set position setpoints
+
+# Step size in degrees
+step_size: 0.1
+
+# starting angle in degrees
+theta: 0
+
+# Radius of circle to be tracked (in meters)
+radius: 1.5
+
+# Ciecle center
+center_x: 0
+center_y: 0
+
+# constant altitude
+altitude: 1.5
