@@ -12,9 +12,6 @@
 #include <cstring>
 
 class FlightManager {
-public:
-  FlightManager();
-  ~FlightManager(){};
 
 private:
   // Create doamin participant
@@ -33,9 +30,12 @@ public:
   const int &object_count() const { return object_count_; }
 
 public:
+  // Intitiliaze the flight manager
+  static void initialize();
+
   // Register a new raptor in the flight manager
   void add_raptor(const std::string name);
 
   // Register a new object in the flight manager
   void add_object(const std::string name);
-};
+} inline fm;
