@@ -7,6 +7,21 @@
 #include <vector>
 #include <yaml-cpp/yaml.h>
 
+// to set parameters from yaml file
+void FlightManager::set_parameters(const std::string path) {
+
+  // Safety check, see if file exists
+  safety_checks::yaml_file_check(path);
+
+  // Load yaml file containing gains
+  YAML::Node param_yaml = YAML::LoadFile(path);
+  pos_thresholds_.x = param_yaml["x_threshold"].as<float>();
+  pos_thresholds_.y = param_yaml["y_threshold"].as<float>();
+  pos_thresholds_.z = param_yaml["z_threshold"].as<float>();
+
+  max_grasp_time_ = param_yaml["max_grasp_time"].as<float>();
+}
+
 // to load waypoints from csv file
 void FlightManager::load_waypoints(const std::string path) {
   // Safety check, see if file exists

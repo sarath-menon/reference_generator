@@ -55,4 +55,6 @@ public:
 
 public:
   void load_waypoints(const std::string path);
+
+  void set_parameters(const std::string path);
 };
