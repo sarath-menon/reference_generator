@@ -1,14 +1,15 @@
 
-add_library(common_lib
-src/FlightManager.cpp
+# ###############################################################################
+# # Library of complete quadcopter controllers
+# ###############################################################################
+
+add_library(common_lib INTERFACE)
+
+target_link_libraries(common_lib INTERFACE
+flight_manager
+raptor
 )
 
-target_include_directories(common_lib PUBLIC include)
 
-target_link_libraries(common_lib PRIVATE
-comm_lib
-fastcdr 
-fastrtps
-yaml-cpp
-)
-
+add_subdirectory(FlightManager)
+add_subdirectory(Raptor)

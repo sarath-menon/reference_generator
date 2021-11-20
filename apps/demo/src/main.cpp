@@ -1,9 +1,10 @@
 
 #include "FlightManager.h"
+#include "Raptor.h"
 
 int main() {
 
-  FlightManager::initialize();
+  Raptor raptor_1(FM.particiant());
 
   // shorter enumerations for convenience
 
