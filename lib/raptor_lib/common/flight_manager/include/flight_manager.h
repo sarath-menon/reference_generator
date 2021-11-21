@@ -36,7 +36,7 @@ public:
   void register_dds(eprosima::fastdds::dds::DomainParticipant *participant);
 
   // Add a behaviours
-  void add_behaviour(std::unique_ptr<Behaviour> behav);
+  void add_behaviour(std::unique_ptr<Behaviour> &&behav);
 
   void set_parameters(const std::string path);
 };
