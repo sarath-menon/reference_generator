@@ -11,12 +11,12 @@
 class Behaviour {
 
 public:
-  Behaviour() = default;
-  virtual ~Behaviour() = default;
+  Behaviour();
+  ~Behaviour();
 
 public:
-  virtual void start();
-  virtual void stop();
+  virtual void start(){};
+  virtual void stop(){};
 
 private:
   // Quadcopter position
@@ -30,5 +30,5 @@ public:
   const cpp_msg::Mocap &current_pose() const { return quad_pose_; }
 
 public:
-  virtual void set_parameters(const std::string path);
+  virtual void set_parameters(const std::string path){};
 };

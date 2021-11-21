@@ -7,15 +7,20 @@
 #include "waypoint_tracker.h"
 #include <math.h>
 
-class GoOverObject {
+class GoOverObject : public Behaviour {
 public:
   GoOverObject();
   ~GoOverObject();
+
+public:
+  virtual void start() override{};
+
+  virtual void stop() override{};
 
 public:
   bool go_over_object(const std::string object, const float height,
                       const param::ctrl_type ctrl_type);
 
 public:
-  void set_parameters(const std::string path);
+  virtual void set_parameters(const std::string path) override;
 };
