@@ -17,10 +17,12 @@
 class FlightManager {
 
 public:
-  FlightManager(Raptor &raptor);
+  FlightManager(std::unique_ptr<Raptor> raptor_ptr_);
   ~FlightManager(){};
 
 private:
+  std::unique_ptr<Raptor> raptor_ptr_;
+
   std::unique_ptr<WaypointTracker> wp_tracker;
 
   // sequence of behavioirs to be executed

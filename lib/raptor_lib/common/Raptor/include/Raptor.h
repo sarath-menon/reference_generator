@@ -12,8 +12,11 @@
 
 class Raptor {
 public:
-  Raptor();
+  Raptor(const std::string &name);
   ~Raptor();
+
+private:
+  std::string name_{};
 
 public:
   void set_parameters(const std::string path);
