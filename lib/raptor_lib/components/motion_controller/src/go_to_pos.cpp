@@ -52,8 +52,6 @@ bool MotionController::go_to_pos(const cpp_msg::Position &current_pos,
       //  Delay for quad to catch up
       std::this_thread::sleep_for(std::chrono::milliseconds(delay_time_));
 
-      // std::cout << "time:" << t_counter << std::endl;
-
       // Logging to console for debugging
       //////////////////////////////////////////////////////////////////////////////////////
       // // Check whether position reached

@@ -2,7 +2,6 @@
 
 #include "MocapPubSubTypes.h"
 #include "QuadPositionCmdPubSubTypes.h"
-#include "default_participant.h"
 #include "default_publisher.h"
 #include "default_subscriber.h"
 #include "geometry_msgs/msgs/Position.h"
