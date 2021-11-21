@@ -1,5 +1,5 @@
 
-#include "raptor.h"
+#include "MotionController.h"
 #include "safety_checks.h"
 #include <fstream>
 #include <iostream>
@@ -9,7 +9,7 @@
 #include <yaml-cpp/yaml.h>
 
 // to set parameters from yaml file
-void Raptor::set_parameters(const std::string path) {
+void MotionController::set_parameters(const std::string path) {
   // Safety check, see if file exists
   safety_checks::yaml_file_check(path);
 
@@ -17,5 +17,6 @@ void Raptor::set_parameters(const std::string path) {
   YAML::Node param_yaml = YAML::LoadFile(path);
 
   // Set waypoints
-  // dt_ = param_yaml["dt"].as<float>();
+  dt_ = param_yaml["dt"].as<float>();
+  delay_time_ = int(dt_ * 1000);
 }

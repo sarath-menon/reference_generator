@@ -1,5 +1,8 @@
 #include "waypoint_tracker.h"
 
-WaypointTracker::WaypointTracker(){
+WaypointTracker::WaypointTracker(
+    eprosima::fastdds::dds::DomainParticipant *participant) {
 
+  // create motion controller
+  motion_ctrl = std::make_unique<MotionController>(participant);
 };

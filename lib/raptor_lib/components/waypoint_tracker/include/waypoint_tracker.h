@@ -6,6 +6,7 @@
 #include "default_publisher.h"
 #include "default_subscriber.h"
 #include "geometry_msgs/msgs/Position.h"
+#include "motion_controller.h"
 #include "quadcopter_msgs/msgs/QuadPositionCmd.h"
 #include "raptor.h"
 #include "sensor_msgs/msgs/Mocap.h"
@@ -15,20 +16,10 @@
 class WaypointTracker {
 
 public:
-  WaypointTracker();
+  WaypointTracker(eprosima::fastdds::dds::DomainParticipant *participant);
   ~WaypointTracker(){};
 
 private:
-  // minimum position difference to start grasping
-  float xy_threshold_{};
-  float z_threshold_{};
-
-  // Indicates whether target position has been reached or not
-  bool x_reach_flag{};
-  bool y_reach_flag{};
-  bool z_reach_flag{};
-  bool all_reach_flag{};
-
   // Containers to store waypoints
   std::vector<float> x_waypoint_{};
   std::vector<float> y_waypoint_{};
@@ -42,17 +33,9 @@ public:
   // maximum time allowed for grasping
   float max_grasp_time_{};
 
-  /// Getter function
-  const cpp_msg::Position &pos_thresholds() const { return pos_thresholds_; }
-
-  /// Getter function
-  const float &xy_threshold() const { return xy_threshold_; }
-
-  /// Getter function
-  const float &z_threshold() const { return z_threshold_; }
-
-  /// Getter function
-  const float &max_grasp_time() const { return max_grasp_time_; }
+  // Pointer to motion controller
+private:
+  std::unique_ptr<MotionController> motion_ctrl;
 
 public:
   void load_waypoints(const std::string path);

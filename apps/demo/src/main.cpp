@@ -5,9 +5,10 @@
 
 int main() {
 
-  Raptor raptor_1(DDS.particiant());
+  Raptor raptor_1;
 
   FlightManager fm_1(raptor_1);
+  fm_1.register_dds(DDS.participant());
 
   // shorter enumerations for convenience
 

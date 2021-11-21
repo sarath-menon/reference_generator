@@ -20,11 +20,14 @@ public:
   ~FlightManager(){};
 
 private:
-  WaypointTracker waypoint_tracker;
+  std::unique_ptr<WaypointTracker> wp_tracker;
 
+  // fastdds
+private:
 public:
   // const float &xy_threshold() const { return xy_threshold_; }
 
 public:
+  void register_dds(eprosima::fastdds::dds::DomainParticipant *participant);
   void set_parameters(const std::string path);
 };
