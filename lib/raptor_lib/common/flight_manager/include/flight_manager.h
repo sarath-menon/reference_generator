@@ -22,6 +22,10 @@ public:
 private:
   std::unique_ptr<WaypointTracker> wp_tracker;
 
+  // sequence of behavioirs to be executed
+
+  std::vector<std::unique_ptr<Behaviour>> bahav_register{};
+
   // fastdds
 private:
 public:
@@ -32,7 +36,7 @@ public:
   void register_dds(eprosima::fastdds::dds::DomainParticipant *participant);
 
   // Add a behaviours
-  void add_behaviour(const Behaviour &behav);
+  void add_behaviour(std::unique_ptr<Behaviour> behav);
 
   void set_parameters(const std::string path);
 };

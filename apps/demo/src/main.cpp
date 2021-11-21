@@ -12,8 +12,11 @@ int main() {
   fm_1.register_dds(DDS.participant());
 
   auto go_to_pos{std::make_unique<GoOverObject>()};
+  Behaviour *ptr{go_to_pos.get()};
 
-  // Behaviour *ptr{go_to_pos.get()};
+  fm_1.add_behaviour(std::move(go_to_pos));
+
+  // ptr->start();
 
   // shorter enumerations for convenience
 
