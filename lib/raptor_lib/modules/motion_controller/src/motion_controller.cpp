@@ -1,7 +1,6 @@
 #include "motion_controller.h"
 
-MotionController::MotionController(
-    eprosima::fastdds::dds::DomainParticipant *participant) {
+MotionCtrl::MotionCtrl(eprosima::fastdds::dds::DomainParticipant *participant) {
   // Fastdds ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
   // Create  subscriber
   quad_sub = new DDSSubscriber(idl_msg::MocapPubSubType(), &quad_pose_,
@@ -16,7 +15,7 @@ MotionController::MotionController(
   position_pub->init();
 }
 
-MotionController::~MotionController() {
+MotionCtrl::~MotionCtrl() {
   delete quad_sub;
   delete position_pub;
 }

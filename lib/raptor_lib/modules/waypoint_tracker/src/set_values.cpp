@@ -18,8 +18,6 @@ void WaypointTracker::set_parameters(const std::string path) {
   pos_thresholds_.x = param_yaml["x_threshold"].as<float>();
   pos_thresholds_.y = param_yaml["y_threshold"].as<float>();
   pos_thresholds_.z = param_yaml["z_threshold"].as<float>();
-
-  max_grasp_time_ = param_yaml["max_grasp_time"].as<float>();
 }
 
 // to load waypoints from csv file
@@ -57,7 +55,7 @@ void WaypointTracker::load_waypoints(const std::string path) {
           z_waypoint_.push_back(std::stof(substr));
           break;
         case 3:
-          max_reach_time_.push_back(std::stof(substr));
+          max_time_.push_back(std::stof(substr));
           break;
         }
       }
@@ -67,7 +65,7 @@ void WaypointTracker::load_waypoints(const std::string path) {
   // for (int i = 0; i < 4; i++) {
   //   std::cout << "Waypoint: " << i << ": (" << x_waypoint_.at(i) << ","
   //             << y_waypoint_.at(i) << "," << z_waypoint_.at(i)
-  //             << ") time:" << max_reach_time_.at(i) << std::endl;
+  //             << ") time:" << max_time_.at(i) << std::endl;
   // }
 
   csv_file.close();

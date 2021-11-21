@@ -1,10 +1,10 @@
 #include "motion_controller.h"
 
 /// go to target position  with max time limit as reaching thresholds
-bool MotionController::go_to_pos(const cpp_msg::Position &current_pos,
-                                 const cpp_msg::Position &target_pos,
-                                 const cpp_msg::Position &pos_thresholds,
-                                 const float max_time, const ctrl_type type) {
+bool MotionCtrl::go_to_pos(const cpp_msg::Position &current_pos,
+                           const cpp_msg::Position &target_pos,
+                           const cpp_msg::Position &pos_thresholds,
+                           const float max_time, const type ctrl_type) {
 
   // initialize time counter
   float t_counter{};
@@ -31,13 +31,13 @@ bool MotionController::go_to_pos(const cpp_msg::Position &current_pos,
     // Send positon cmd if position not reached
     else {
       // Set pos cmd
-      switch (type) {
+      switch (ctrl_type) {
 
-      case ctrl_type::px4:
+      case type::px4:
         quad_pos_cmd.position = target_pos;
         break;
 
-      case ctrl_type::mueller:
+      case type::mueller:
         quad_pos_cmd.position =
             muller_controller(current_pos, target_pos, max_time, dt_);
         break;

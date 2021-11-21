@@ -9,7 +9,7 @@
 #include <yaml-cpp/yaml.h>
 
 // to set parameters from yaml file
-void MotionController::set_parameters(const std::string path) {
+void MotionCtrl::set_parameters(const std::string path) {
   // Safety check, see if file exists
   safety_checks::yaml_file_check(path);
 

@@ -23,18 +23,20 @@ private:
   std::vector<float> x_waypoint_{};
   std::vector<float> y_waypoint_{};
   std::vector<float> z_waypoint_{};
-  std::vector<float> max_reach_time_{};
+  std::vector<float> max_time_{};
 
 public:
   // Positions limits to attain to be consodered reached
   cpp_msg::Position pos_thresholds_;
 
-  // maximum time allowed for grasping
-  float max_grasp_time_{};
-
   // Pointer to motion controller
 private:
-  std::unique_ptr<MotionController> motion_ctrl;
+  std::unique_ptr<MotionCtrl> motion_ctrl;
+
+public:
+  bool go_to_waypoint(const int index, const MotionCtrl::type ctrl_type);
+  bool go_to_waypoint(const cpp_msg::Position waypoint, const float max_time,
+                      const MotionCtrl::type ctrl_type);
 
 public:
   void load_waypoints(const std::string path);

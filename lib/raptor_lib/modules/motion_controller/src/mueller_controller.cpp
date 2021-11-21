@@ -4,9 +4,9 @@
 
 /// go to target position  with max time limit as reaching thresholds
 cpp_msg::Position
-MotionController::muller_controller(const cpp_msg::Position &current_pos,
-                                    const cpp_msg::Position &target_pos,
-                                    const float max_time, const float dt) {
+MotionCtrl::muller_controller(const cpp_msg::Position &current_pos,
+                              const cpp_msg::Position &target_pos,
+                              const float max_time, const float dt) {
 
   // Define how gravity lies in our coordinate system
   static Vec3 gravity = Vec3(0, 0, -9.81); //[m/s**2]

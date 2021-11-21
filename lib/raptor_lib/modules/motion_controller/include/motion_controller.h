@@ -9,10 +9,14 @@
 #include "sensor_msgs/msgs/Mocap.h"
 #include <math.h>
 
-class MotionController {
+class MotionCtrl {
 public:
-  MotionController(eprosima::fastdds::dds::DomainParticipant *participant);
-  ~MotionController();
+  MotionCtrl(eprosima::fastdds::dds::DomainParticipant *participant);
+  ~MotionCtrl();
+
+public:
+  // types of setpoint genetratore
+  enum class type { px4, mueller };
 
 private:
   // Quadcopter position
@@ -35,9 +39,6 @@ private:
   // controller sampling time in milliseconds
   int delay_time_{};
 
-  // types of setpoint genetratore
-  enum class ctrl_type { px4, mueller };
-
 private:
   // check whether postion has been reached
   bool check_reached(const float &current_pos, const float &desired_pos,
@@ -47,7 +48,7 @@ private:
   bool go_to_pos(const cpp_msg::Position &current_pos,
                  const cpp_msg::Position &target_pos,
                  const cpp_msg::Position &pos_thresholds, const float max_time,
-                 const ctrl_type type);
+                 const type ctrl_type);
 
   cpp_msg::Position muller_controller(const cpp_msg::Position &current_pos,
                                       const cpp_msg::Position &target_pos,

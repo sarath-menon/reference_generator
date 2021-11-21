@@ -12,5 +12,5 @@ components_lib
 
 add_subdirectory(common)
 add_subdirectory(behaviours)
-add_subdirectory(components)
+add_subdirectory(modules)
 
