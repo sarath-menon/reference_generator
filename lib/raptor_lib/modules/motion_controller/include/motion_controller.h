@@ -13,7 +13,7 @@
 
 class MotionCtrl {
 public:
-  MotionCtrl(DefaultParticipant *dp);
+  MotionCtrl(const DefaultParticipant *dp);
   ~MotionCtrl();
 
 private:

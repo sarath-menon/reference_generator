@@ -34,7 +34,7 @@ public:
 
 public:
   // register fastdds domain participant
-  void register_dds(DefaultParticipant *dp);
+  void register_dds(const DefaultParticipant *dp);
 
   // Add a behaviours
   void add_behaviour(std::unique_ptr<Behaviour> &&behav);

@@ -1,6 +1,6 @@
 #include "motion_controller.h"
 
-MotionCtrl::MotionCtrl(DefaultParticipant *dp) {
+MotionCtrl::MotionCtrl(const DefaultParticipant *dp) {
   // Fastdds ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
   // Create  subscriber
   quad_sub = new DDSSubscriber(idl_msg::MocapPubSubType(), &quad_pose_,

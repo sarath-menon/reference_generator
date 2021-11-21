@@ -15,7 +15,7 @@
 class WaypointTracker {
 
 public:
-  WaypointTracker(DefaultParticipant *dp);
+  WaypointTracker(const DefaultParticipant *dp);
   ~WaypointTracker(){};
 
 private:
