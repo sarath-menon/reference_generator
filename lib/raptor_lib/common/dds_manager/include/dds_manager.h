@@ -23,6 +23,6 @@ private:
 
 public:
   /// Getter function
-  auto participant() const { return dp->participant(); }
+  auto participant() const { return dp.get(); }
 
 } inline DDS;

@@ -3,6 +3,7 @@
 #include "MocapPubSubTypes.h"
 #include "QuadPositionCmdPubSubTypes.h"
 #include "behaviour.h"
+#include "default_participant.h"
 #include "default_publisher.h"
 #include "default_subscriber.h"
 #include "geometry_msgs/msgs/Position.h"
@@ -33,7 +34,7 @@ public:
 
 public:
   // register fastdds domain participant
-  void register_dds(eprosima::fastdds::dds::DomainParticipant *participant);
+  void register_dds(DefaultParticipant *dp);
 
   // Add a behaviours
   void add_behaviour(std::unique_ptr<Behaviour> &&behav);
