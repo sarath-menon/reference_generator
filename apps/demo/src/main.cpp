@@ -6,8 +6,9 @@
 
 int main() {
 
+  FlightManager::register_dds(DDS.participant());
+
   FlightManager fm_1(std::make_unique<Raptor>("selva1"));
-  fm_1.register_dds(DDS.participant());
 
   fm_1.add_behaviour(GoOverObject::get());
 

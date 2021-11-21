@@ -21,22 +21,20 @@ public:
   ~FlightManager(){};
 
 private:
+  // pointer to domain participant
+  inline static DefaultParticipant *dp_;
+
   std::unique_ptr<Raptor> raptor_ptr_;
 
   std::unique_ptr<WaypointTracker> wp_tracker;
 
   // sequence of behavioirs to be executed
 public:
-  std::vector<std::unique_ptr<Behaviour>> behav_register{};
-
-  // fastdds
-private:
-public:
-  // const float &xy_threshold() const { return xy_threshold_; }
+  std::vector<std::unique_ptr<Behaviour>> behav_register;
 
 public:
   // register fastdds domain participant
-  void register_dds(const DefaultParticipant *dp);
+  static void register_dds(DefaultParticipant *dp);
 
   // Add a behaviours
   void add_behaviour(std::unique_ptr<Behaviour> &&behav);
