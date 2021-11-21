@@ -17,7 +17,7 @@
 class FlightManager {
 
 public:
-  FlightManager(std::unique_ptr<Raptor> raptor_ptr_);
+  FlightManager(const std::string raptor_name);
   ~FlightManager(){};
 
 private:

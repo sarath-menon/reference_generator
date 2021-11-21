@@ -10,7 +10,7 @@ int main() {
   FlightManager::register_dds(DDS.participant());
 
   // create a flight manager for "srl_quad" raptor
-  FlightManager fm_1(std::make_unique<Raptor>("selva1"));
+  FlightManager fm_1("srl_quad");
 
   // add go over object behaviour to fm_1 flight manager
   fm_1.add_behaviour(GoOverObject::get());
