@@ -4,7 +4,8 @@
 bool MotionCtrl::go_to_pos(const cpp_msg::Position &current_pos,
                            const cpp_msg::Position &target_pos,
                            const cpp_msg::Position &pos_thresholds,
-                           const float max_time, const type ctrl_type) {
+                           const float max_time,
+                           const param::ctrl_type ctrl_type) {
 
   // initialize time counter
   float t_counter{};
@@ -33,11 +34,11 @@ bool MotionCtrl::go_to_pos(const cpp_msg::Position &current_pos,
       // Set pos cmd
       switch (ctrl_type) {
 
-      case type::px4:
+      case param::ctrl_type::px4:
         quad_pos_cmd.position = target_pos;
         break;
 
-      case type::mueller:
+      case param::ctrl_type::mueller:
         quad_pos_cmd.position =
             muller_controller(current_pos, target_pos, max_time, dt_);
         break;

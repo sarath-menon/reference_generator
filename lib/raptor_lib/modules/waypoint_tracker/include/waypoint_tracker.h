@@ -33,9 +33,9 @@ private:
   std::unique_ptr<MotionCtrl> motion_ctrl;
 
 public:
-  bool go_to_waypoint(const int index, const MotionCtrl::type ctrl_type);
+  bool go_to_waypoint(const int index, const param::ctrl_type ctrl_type);
   bool go_to_waypoint(const cpp_msg::Position waypoint, const float max_time,
-                      const MotionCtrl::type ctrl_type);
+                      const param::ctrl_type ctrl_type);
 
 public:
   void load_waypoints(const std::string path);

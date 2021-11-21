@@ -2,6 +2,7 @@
 
 #include "MocapPubSubTypes.h"
 #include "QuadPositionCmdPubSubTypes.h"
+#include "ctrl_params.h"
 #include "default_publisher.h"
 #include "default_subscriber.h"
 #include "geometry_msgs/msgs/Position.h"
@@ -13,10 +14,6 @@ class MotionCtrl {
 public:
   MotionCtrl(eprosima::fastdds::dds::DomainParticipant *participant);
   ~MotionCtrl();
-
-public:
-  // types of setpoint genetratore
-  enum class type { px4, mueller };
 
 private:
   // Quadcopter position
@@ -48,7 +45,7 @@ private:
   bool go_to_pos(const cpp_msg::Position &current_pos,
                  const cpp_msg::Position &target_pos,
                  const cpp_msg::Position &pos_thresholds, const float max_time,
-                 const type ctrl_type);
+                 const param::ctrl_type ctrl_type);
 
   cpp_msg::Position muller_controller(const cpp_msg::Position &current_pos,
                                       const cpp_msg::Position &target_pos,

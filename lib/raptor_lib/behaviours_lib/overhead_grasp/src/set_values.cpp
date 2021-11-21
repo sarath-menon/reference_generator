@@ -16,7 +16,6 @@ void OverheadGrasp::set_parameters(const std::string path) {
   // Load yaml file containing gains
   YAML::Node param_yaml = YAML::LoadFile(path);
 
-  // Set waypoints
-  dt_ = param_yaml["dt"].as<float>();
-  delay_time_ = int(dt_ * 1000);
+  // // Set waypoints
+  // dt_ = param_yaml["dt"].as<float>();
 }

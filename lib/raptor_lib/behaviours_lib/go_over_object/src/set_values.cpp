@@ -13,6 +13,5 @@ void GoOverObject::set_parameters(const std::string path) {
   YAML::Node param_yaml = YAML::LoadFile(path);
 
   // Set waypoints
-  dt_ = param_yaml["dt"].as<float>();
-  delay_time_ = int(dt_ * 1000);
+  // dt_ = param_yaml["dt"].as<float>();
 }
