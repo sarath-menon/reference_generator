@@ -24,7 +24,7 @@ private:
 
   // sequence of behavioirs to be executed
 public:
-  std::vector<std::unique_ptr<Behaviour>> bahav_register{};
+  std::vector<std::unique_ptr<Behaviour>> behav_register{};
 
   // fastdds
 private:

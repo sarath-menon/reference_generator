@@ -23,4 +23,7 @@ public:
 
 public:
   virtual void set_parameters(const std::string path) override;
+
+public:
+  static auto get() { return std::move(std::make_unique<GoOverObject>()); }
 };
