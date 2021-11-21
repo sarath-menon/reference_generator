@@ -10,10 +10,10 @@
 #include "sensor_msgs/msgs/Mocap.h"
 #include <math.h>
 
-class MotionController {
+class GoOverObject {
 public:
-  MotionController();
-  ~MotionController();
+  GoOverObject();
+  ~GoOverObject();
 
 private:
   // Quadcopter position

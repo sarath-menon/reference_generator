@@ -5,7 +5,7 @@
 add_library(raptor_lib INTERFACE)
 
 target_link_libraries(raptor_lib INTERFACE
-# behaviours_lib
+behaviours_lib
 common_lib
 modules
 )

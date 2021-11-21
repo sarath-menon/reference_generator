@@ -1,5 +1,5 @@
 
-#include "MotionController.h"
+#include "overhead_grasp.h"
 #include "safety_checks.h"
 #include <fstream>
 #include <iostream>
@@ -9,7 +9,7 @@
 #include <yaml-cpp/yaml.h>
 
 // to set parameters from yaml file
-void MotionController::set_parameters(const std::string path) {
+void OverheadGrasp::set_parameters(const std::string path) {
   // Safety check, see if file exists
   safety_checks::yaml_file_check(path);
 

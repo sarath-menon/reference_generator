@@ -1,12 +1,14 @@
 
-add_library(motion_controller
-src/raptor.cpp
+add_library(overhead_grasp
+src/overhead_grasp.cpp
 src/set_values.cpp
 )
 
-target_include_directories(motion_controller PUBLIC include)
+target_include_directories(overhead_grasp PUBLIC include)
 
-target_link_libraries(motion_controller PRIVATE
+target_link_libraries(overhead_grasp PRIVATE
+behaviour
+modules
 comm_lib
 fastcdr 
 fastrtps

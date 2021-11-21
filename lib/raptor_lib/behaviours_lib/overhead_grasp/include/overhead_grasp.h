@@ -1,19 +1,10 @@
 #pragma once
+#include "behaviour.h"
 
-#include "MocapPubSubTypes.h"
-#include "QuadPositionCmdPubSubTypes.h"
-#include "default_participant.h"
-#include "default_publisher.h"
-#include "default_subscriber.h"
-#include "geometry_msgs/msgs/Position.h"
-#include "quadcopter_msgs/msgs/QuadPositionCmd.h"
-#include "sensor_msgs/msgs/Mocap.h"
-#include <math.h>
-
-class MotionController {
+class OverheadGrasp {
 public:
-  MotionController();
-  ~MotionController();
+  OverheadGrasp();
+  ~OverheadGrasp();
 
 private:
   // Quadcopter position

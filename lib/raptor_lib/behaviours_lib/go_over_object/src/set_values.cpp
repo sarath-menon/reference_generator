@@ -1,15 +1,11 @@
 
-#include "MotionController.h"
+#include "go_over_object.h"
 #include "safety_checks.h"
-#include <fstream>
-#include <iostream>
-#include <sstream>
 #include <string>
-#include <vector>
 #include <yaml-cpp/yaml.h>
 
 // to set parameters from yaml file
-void MotionController::set_parameters(const std::string path) {
+void GoOverObject::set_parameters(const std::string path) {
   // Safety check, see if file exists
   safety_checks::yaml_file_check(path);
 
