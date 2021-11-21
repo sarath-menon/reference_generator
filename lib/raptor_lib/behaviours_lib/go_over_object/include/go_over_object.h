@@ -13,7 +13,7 @@ public:
   ~GoOverObject();
 
 public:
-  virtual void start() override{};
+  virtual void start() override { std::cout << "selva" << std::endl; };
 
   virtual void stop() override{};
 
