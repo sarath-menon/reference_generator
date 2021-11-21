@@ -1,11 +1,11 @@
 # ###############################################################################
-# # Library of components
+# # Library of modules
 # ###############################################################################
 
 
-add_library(components_lib INTERFACE)
+add_library(modules INTERFACE)
 
-target_link_libraries(components_lib INTERFACE
+target_link_libraries(modules INTERFACE
 mueller_controller
 waypoint_tracker
 motion_controller

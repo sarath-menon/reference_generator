@@ -2,6 +2,7 @@
 
 #include "MocapPubSubTypes.h"
 #include "QuadPositionCmdPubSubTypes.h"
+#include "behaviour.h"
 #include "default_publisher.h"
 #include "default_subscriber.h"
 #include "geometry_msgs/msgs/Position.h"
@@ -27,6 +28,11 @@ public:
   // const float &xy_threshold() const { return xy_threshold_; }
 
 public:
+  // register fastdds domain participant
   void register_dds(eprosima::fastdds::dds::DomainParticipant *participant);
+
+  // Add a behaviours
+  void add_behaviour(const Behaviour &behav);
+
   void set_parameters(const std::string path);
 };

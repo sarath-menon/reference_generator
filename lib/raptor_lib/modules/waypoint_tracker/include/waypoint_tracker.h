@@ -7,7 +7,6 @@
 #include "geometry_msgs/msgs/Position.h"
 #include "motion_controller.h"
 #include "quadcopter_msgs/msgs/QuadPositionCmd.h"
-#include "raptor.h"
 #include "sensor_msgs/msgs/Mocap.h"
 #include <cmath>
 #include <cstring>
