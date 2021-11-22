@@ -22,6 +22,8 @@ int main() {
   // Initialize publisher
   position_pub.init();
 
+  set_circle_parameters(paths::circle_prm);
+
   // Go to circle start point
   pos_msg.position.z = prm::altitude;
   pos_msg.position.x = 1;
@@ -30,26 +32,20 @@ int main() {
   // Delay for quad to catch up
   std::this_thread::sleep_for(std::chrono::seconds(5));
 
-  float theta = 0.0;
-
   Timer t;
-
-  // Time parametrizaiton of circle
-  float radius = 1.0;
-  float omega = M_PI / 3;
 
   // start timer
   t.start();
 
-  while (t.sec() < 10.0) {
+  while (t.sec() < 30.0) {
 
     // COmpute x,y coordinates
     // std::cout << "Timestep:" << i << '\n';
-    pos_msg.position.x = prm::center_x + radius * cos(omega * t);
-    pos_msg.position.y = prm::center_y + radius * sin(omega * t);
+    pos_msg.position.x = prm::center_x + prm::radius * cos(prm::omega * t);
+    pos_msg.position.y = prm::center_y + prm::radius * sin(prm::omega * t);
 
     // Delay for quad to catch up
-    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    std::this_thread::sleep_for(std::chrono::milliseconds(20));
 
     position_pub.publish(pos_msg);
   }

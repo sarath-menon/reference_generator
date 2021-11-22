@@ -3,15 +3,15 @@
 namespace prm {
 
 // Step size in degrees
-float step_size = 0.1;
+float omega{};
 
 // Radius of circle to be tracked (in meters)
-float radius = 1.5;
+float radius{};
 
 // Local center
-float center_x = 0;
-float center_y = 0;
+float center_x{};
+float center_y{};
 
 // constant altitude
-float altitude = 1.5;
+float altitude{};
 } // namespace prm
