@@ -26,11 +26,12 @@ private:
 
   std::unique_ptr<Raptor> raptor_ptr_;
 
-  std::unique_ptr<WaypointTracker> wp_tracker;
-
-  // sequence of behavioirs to be executed
 public:
+  // sequence of behavioirs to be executed
   std::vector<std::unique_ptr<Behaviour>> behav_register;
+
+  // waypoint tracker
+  std::unique_ptr<WaypointTracker> wp_tracker;
 
 public:
   // register fastdds domain participant

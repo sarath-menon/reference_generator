@@ -13,11 +13,7 @@ int main() {
   FlightManager fm_1("srl_quad");
 
   // add go over object behaviour to fm_1 flight manager
-  fm_1.add_behaviour(GoOverObject::get());
-
-  fm_1.behav_register.at(0)->start();
+  // fm_1->wp_tracker.go_to_waypoint();
 
   // shorter enumerations for convenience
-
-  // result = grasper.go_to_waypoint(1, mueller_ctrl);
 }
