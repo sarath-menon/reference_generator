@@ -12,7 +12,6 @@ inline void set_circle_parameters(const std::string setpoint_path) {
 
   // load parameters
   prm::step_size = circle_yaml["step_size"].as<float>();
-  prm::theta = circle_yaml["theta"].as<float>();
   prm::radius = circle_yaml["radius"].as<float>();
 
   prm::center_x = circle_yaml["center_x"].as<float>();

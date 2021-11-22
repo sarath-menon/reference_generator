@@ -10,9 +10,11 @@ flight_manager
 dds_manager
 raptor
 behaviour
+utilities
 )
 
 add_subdirectory(dds_manager)
 add_subdirectory(flight_manager)
 add_subdirectory(raptor)
 add_subdirectory(behaviour)
+add_subdirectory(utilities)

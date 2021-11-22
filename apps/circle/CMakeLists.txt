@@ -1,15 +1,15 @@
 
-add_executable(swoop
+add_executable(circle
 src/main.cpp
 )
 
-target_include_directories(swoop PUBLIC include)
+target_include_directories(circle PUBLIC include)
 
-target_link_libraries(swoop PRIVATE
+target_link_libraries(circle PRIVATE
 comm_lib
 fastcdr 
 fastrtps
 yaml-cpp
-grasping_lib
 mueller_lib
+raptor_lib
 )

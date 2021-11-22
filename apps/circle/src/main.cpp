@@ -1,33 +1,56 @@
 
+#include "QuadPositionCmdPubSubTypes.h"
+#include "default_participant.h"
+#include "default_publisher.h"
 #include "geometry_msgs/msgs/Position.h"
-#include "grasper.h"
 #include "paths.h"
+#include "quadcopter_msgs/msgs/QuadPositionCmd.h"
 #include "set_circle_parameters.h"
+#include "timer.h"
 
 int main() {
+  // Quadcopter position msg
+  cpp_msg::QuadPositionCmd pos_msg{};
 
-  Grasper grasper;
-  // shorter enumerations for convenience
-  Grasper::ctrl_type px4_ctrl = Grasper::ctrl_type::px4;
+  // Create participant. Arguments-> Domain id, QOS name
+  DefaultParticipant dp(0, "quad_reference_publisher");
 
-  // set parameters
-  grasper.set_parameters(paths::ctrl_prm);
-  set_circle_parameters(paths::circle_prm);
-  bool result{};
+  // Create publisher with msg type
+  DDSPublisher position_pub(idl_msg::QuadPositionCmdPubSubType(), "pos_cmd",
+                            dp.participant());
 
-  cpp_msg::Position current_pos;
+  // Initialize publisher
+  position_pub.init();
 
-  for (int i = 0; i < 360; i++) {
+  // Go to circle start point
+  pos_msg.position.z = prm::altitude;
+  pos_msg.position.x = 1;
+  position_pub.publish(pos_msg);
+
+  // Delay for quad to catch up
+  std::this_thread::sleep_for(std::chrono::seconds(5));
+
+  float theta = 0.0;
+
+  Timer t;
+
+  // Time parametrizaiton of circle
+  float radius = 1.0;
+  float omega = M_PI / 3;
+
+  // start timer
+  t.start();
+
+  while (t.sec() < 10.0) {
 
     // COmpute x,y coordinates
     // std::cout << "Timestep:" << i << '\n';
-    current_pos.x = prm::center_x + prm::radius * cos(prm::theta);
-    current_pos.y = prm::center_y + prm::radius * sin(prm::theta);
-    current_pos.z = prm::altitude;
+    pos_msg.position.x = prm::center_x + radius * cos(omega * t);
+    pos_msg.position.y = prm::center_y + radius * sin(omega * t);
 
-    theta += step_size;
+    // Delay for quad to catch up
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
-    // Track waypoint
-    result = grasper.go_to_waypoint(0, px4_ctrl);
+    position_pub.publish(pos_msg);
   }
 }

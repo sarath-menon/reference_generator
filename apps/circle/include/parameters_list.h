@@ -5,9 +5,6 @@ namespace prm {
 // Step size in degrees
 float step_size = 0.1;
 
-// center angle in degrees
-float theta = 0;
-
 // Radius of circle to be tracked (in meters)
 float radius = 1.5;
 
