@@ -10,4 +10,4 @@ object_name: "srl_box" #name of object to be grasped
 quad_name: "srl_quad" #name of object to be grasped
 
 #prefix of DDS topic
-topic_prefix: "topic_"
+topic_prefix: "mocap_"
