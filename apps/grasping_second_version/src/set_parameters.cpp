@@ -26,6 +26,8 @@ void Grasper::set_parameters(const std::string path) {
 
   // set object name
   object_name_ = setpoint_yaml["object_name"].as<std::string>();
+  quad_name_ = setpoint_yaml["quad_name"].as<std::string>();
+  topic_prefix_ = setpoint_yaml["topic_prefix"].as<std::string>();
 }
 
 // to load waypoints from csv file

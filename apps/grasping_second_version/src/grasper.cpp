@@ -8,7 +8,7 @@ Grasper::Grasper() {
 
   // Create  subscriber
   mocap_quad_sub = new DDSSubscriber(idl_msg::MocapPubSubType(), &quad_pose_,
-                                     "mocap_pose", dp->participant());
+                                     topic_prefix_+quad_name_, dp->participant());
 
   // initialize  subscriberDefaultParticipant
   mocap_quad_sub->init();
@@ -16,7 +16,7 @@ Grasper::Grasper() {
   // Create  subscriber for object mocap
   mocap_object_sub =
       new DDSSubscriber(idl_msg::MocapPubSubType(), &object_pose_,
-                        "mocap_object_pose", dp->participant());
+                        topic_prefix_+object_name_, dp->participant());
 
   // initialize object mocap subscriberDefaultParticipant
   mocap_object_sub->init();

@@ -14,26 +14,20 @@ int main() {
   grasper.set_parameters(paths::parameters_path);
   grasper.load_setpoints(paths::setpoint_list_path);
 
-  // // old working
-  // bool result = grasper.go_to_pos(0);
+  //ON GROUND
+
+  // bool result = grasper.go_near_object(0.0, 0.0, 1.0, 6.5,false);
+  // result = grasper.go_near_object(0.0, 0.0, 0.5, 4,true);
+  // result = grasper.go_near_object(0.0, 0.0, 0.01, 5,false);
+  // result = grasper.departure(1.0,4.0,false);
+  // result = grasper.go_to_pos(0);
+
+  //ON TABLE
+
+  // bool result = grasper.go_near_object(0.0, 0.0, 0.5, 6.5,false);
+  // result = grasper.go_near_object(0.0, 0.0, 0.01, 5,false);
+  // result = grasper.departure(1.5,4.0,false);
   // result = grasper.go_to_pos(1);
-  // result = grasper.go_to_pos(2);
 
-  // new automatic
-  bool result = grasper.go_near_object(0.0, 0.0, 1.0, 7.5,false);
-  result = grasper.go_near_object(0.0, 0.0, 0.5, 4,true);
-  result = grasper.go_near_object(0.0, 0.0, 0.012, 5,false);
-  //result = grasper.departure(0.3,4.0,false);
-  result = grasper.departure(1.0,4.0,false);
-  //result = grasper.go_near_object(0.0, 0.0, 0.5, 6,true);
-  // grasping step
-  //result = grasper.go_near_object(0.0, 0.0, 0.5, 10);
-
-  // Delay for grasping
-  //  Delay for quad to catch up
-  //std::this_thread::sleep_for(std::chrono::seconds(2));
-
-  result = grasper.go_to_pos(0);
-  //result = grasper.go_to_pos(1);
 }
 

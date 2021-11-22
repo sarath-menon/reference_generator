@@ -65,6 +65,9 @@ private:
 
   // object name
   std::string object_name_{};
+  std::string quad_name_{};
+  //DDS topic prefix
+  std::string topic_prefix_{};
 
 public:
   /// Getter function
