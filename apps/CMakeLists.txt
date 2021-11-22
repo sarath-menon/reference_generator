@@ -1,6 +1,5 @@
-add_subdirectory(circle_traj_position)
-add_subdirectory(circle_traj_velocity)
-add_subdirectory(lemniscate_traj_position)
+
+add_subdirectory(lemniscate)
 add_subdirectory(go_to_position)
 add_subdirectory(minimum_jerk)
 add_subdirectory(grasp_object)

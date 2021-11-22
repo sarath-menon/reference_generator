@@ -1,0 +1,14 @@
+# Set position setpoints
+
+# angular velocity
+omega: 0.7 #[rad/s]
+
+# Radius of circle to be tracked (in meters)
+a: 1.5
+
+# Ciecle center
+center_x: 0.5
+center_y: 0.5
+
+# constant altitude
+altitude: 1.5
