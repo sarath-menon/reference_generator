@@ -72,5 +72,8 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
   }
 
   // if this line reached, then target coudln't be reached in given time
+  std::cerr << "Setpoint couldn't be reached in time. Please check setup"
+            << std::endl;
+
   return false;
 }
