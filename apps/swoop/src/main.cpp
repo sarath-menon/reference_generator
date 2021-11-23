@@ -13,9 +13,9 @@ int main() {
   bool result{};
 
   // Track waypoints
-  result = grasper.go_to_waypoint(0, px4_ctrl);
-  result = grasper.go_to_waypoint(1, px4_ctrl);
-  result = grasper.go_to_waypoint(2, px4_ctrl);
+  result = grasper.go_to_waypoint(0, mueller_ctrl);
+  result = grasper.go_to_waypoint(1, mueller_ctrl);
+  result = grasper.go_to_waypoint(2, mueller_ctrl);
 
   // // Track waypoints
   // result = grasper.go_to_waypoint(0, mueller_ctrl);

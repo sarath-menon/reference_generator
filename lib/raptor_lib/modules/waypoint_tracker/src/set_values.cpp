@@ -46,13 +46,13 @@ void WaypointTracker::load_waypoints(const std::string path) {
 
         switch (i) {
         case 0:
-          x_waypoint_.push_back(std::stof(substr));
+          x_wp_list.push_back(std::stof(substr));
           break;
         case 1:
-          y_waypoint_.push_back(std::stof(substr));
+          y_wp_list.push_back(std::stof(substr));
           break;
         case 2:
-          z_waypoint_.push_back(std::stof(substr));
+          z_wp_list.push_back(std::stof(substr));
           break;
         case 3:
           max_time_.push_back(std::stof(substr));
@@ -63,8 +63,8 @@ void WaypointTracker::load_waypoints(const std::string path) {
   }
 
   // for (int i = 0; i < 4; i++) {
-  //   std::cout << "Waypoint: " << i << ": (" << x_waypoint_.at(i) << ","
-  //             << y_waypoint_.at(i) << "," << z_waypoint_.at(i)
+  //   std::cout << "Waypoint: " << i << ": (" << x_wp_list.at(i) << ","
+  //             << y_wp_list.at(i) << "," << z_wp_list.at(i)
   //             << ") time:" << max_time_.at(i) << std::endl;
   // }
 

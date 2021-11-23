@@ -56,7 +56,7 @@ bool Grasper::go_to_pos(const cpp_msg::Position &current_pos,
 
       // Logging to console for debugging
       //////////////////////////////////////////////////////////////////////////////////////
-      // // Check whether position reached
+      // Check whether position reached
       // std::cout << "quad pose:" << current_pos.x << '\t' << current_pos.y
       //           << '\t' << current_pos.z << std::endl;
 

@@ -37,7 +37,7 @@ int main() {
   // start timer
   t.start();
 
-  while (t.sec() < 30.0) {
+  while (t.sec() < 10.0) {
 
     // COmpute x,y coordinates
     // std::cout << "Timestep:" << i << '\n';

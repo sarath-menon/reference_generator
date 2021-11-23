@@ -20,9 +20,9 @@ public:
 
 private:
   // Containers to store waypoints
-  std::vector<float> x_waypoint_{};
-  std::vector<float> y_waypoint_{};
-  std::vector<float> z_waypoint_{};
+  std::vector<float> x_wp_list{};
+  std::vector<float> y_wp_list{};
+  std::vector<float> z_wp_list{};
   std::vector<float> max_time_{};
 
 public:
@@ -35,7 +35,7 @@ private:
 
 public:
   bool go_to_waypoint(const int index, const param::ctrl_type ctrl_type);
-  bool go_to_waypoint(const cpp_msg::Position waypoint, const float max_time,
+  bool go_to_waypoint(const cpp_msg::Position wp, const float max_time,
                       const param::ctrl_type ctrl_type);
 
 public:
