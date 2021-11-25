@@ -1,5 +1,7 @@
 #pragma once
 
+#include <math.h>
+
 #include "MocapPubSubTypes.h"
 #include "QuadPositionCmdPubSubTypes.h"
 #include "default_participant.h"
@@ -9,14 +11,13 @@
 #include "helper.h"
 #include "quadcopter_msgs/msgs/QuadPositionCmd.h"
 #include "sensor_msgs/msgs/Mocap.h"
-#include <math.h>
 
 class Grasper {
-public:
+ public:
   Grasper();
   ~Grasper();
 
-private:
+ private:
   // Current state
   cpp_msg::Mocap quad_pose_{};
 
@@ -26,7 +27,10 @@ private:
   // object position
   cpp_msg::Mocap object_pose_{};
 
-public:
+  // stand position
+  cpp_msg::Mocap stand_pose_{};
+
+ public:
   // Create doamin participant
   std::unique_ptr<DefaultParticipant> dp;
 
@@ -36,11 +40,14 @@ public:
   // Motion capture data subscriber for grabbed object
   DDSSubscriber<idl_msg::MocapPubSubType, cpp_msg::Mocap> *mocap_object_sub;
 
+  // Motion capture data subscriber for stand
+  DDSSubscriber<idl_msg::MocapPubSubType, cpp_msg::Mocap> *mocap_stand_sub;
+
   // Create publisher with msg type
   DDSPublisher *position_pub;
 
   // parameter
-private:
+ private:
   // controller sampling time in seconds
   float dt_{};
 
@@ -66,15 +73,18 @@ private:
   // object name
   std::string object_name_{};
   std::string quad_name_{};
-  //DDS topic prefix
+  // DDS topic prefix
   std::string topic_prefix_{};
 
-public:
+ public:
   /// Getter function
   const cpp_msg::Mocap &quad_pose() const { return quad_pose_; }
 
   /// Getter function
   const cpp_msg::Mocap &object_pose() const { return object_pose_; }
+
+  /// Getter function
+  const cpp_msg::Mocap &stand_pose() const { return stand_pose_; }
 
   /// Getter function
   const float &dt() const { return dt_; }
@@ -87,7 +97,6 @@ public:
 
   /// Getter function
   cpp_msg::Position &setpoint(const float index) const {
-
     static cpp_msg::Position setpoint{};
     setpoint.x = x_setpoint_.at(index);
     setpoint.y = y_setpoint_.at(index);
@@ -98,22 +107,22 @@ public:
 
   /// Getter function
   const float &max_reach_time(const float index) const {
-
     static float max_reach_time{};
     max_reach_time = max_reach_time_.at(index);
     return max_reach_time;
   }
 
-public:
+ public:
   /// Setter function
   bool go_to_pos(const int index);
 
   bool go_near_object(const float x_ref, const float y_ref, const float z_ref,
-                      const float time, const bool pos_flag);
+                      const float time, const bool pos_flag,
+                      std::string topic_name);
 
   bool departure(const float z_ref, const float time, const bool pos_flag);
 
-public:
+ public:
   void set_parameters(const std::string path);
 
   void load_setpoints(const std::string path);
