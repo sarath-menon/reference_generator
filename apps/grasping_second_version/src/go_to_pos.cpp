@@ -1,15 +1,13 @@
 #include "grasper.h"
 
 /// Setter function
-bool Grasper::go_to_pos(const int index) {
-
+bool Grasper::go_to_pos(const int index, const bool pos_flag) {
   // time counter
   float t_counter{};
   std::cout << "Setpoint: " << setpoint(index).x << '\t' << setpoint(index).y
             << '\t' << setpoint(index).z << std::endl;
 
   while (t_counter < max_reach_time_.at(index)) {
-
     t_counter += dt_;
 
     //  Delay for quad to catch up
@@ -32,7 +30,7 @@ bool Grasper::go_to_pos(const int index) {
     //           << '\t' << z_reach_flag << std::endl;
 
     // exit if position has been reached
-    if (x_reach_flag && y_reach_flag && z_reach_flag == true) {
+    if (pos_flag && x_reach_flag && y_reach_flag && z_reach_flag == true) {
       std::cout << "Target position has been reached" << std::endl;
       return true;
       break;

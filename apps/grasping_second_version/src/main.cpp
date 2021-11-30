@@ -19,14 +19,16 @@ int main() {
   // taking off via pos_ctrl_interface
 
   // grabbing object
-  result = grasper.go_near_object(0.0, 0.0, 1.0, 4, true, "box");   // 6.5
-  result = grasper.go_near_object(0.0, 0.0, 0.5, 4, false, "box");  // 6.5
-  result = grasper.go_near_object(0.0, 0.0, 0.1, 4, false, "box");  // 6.5
+  result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "box");   // 6.5
+  result = grasper.go_near_object(0.0, 0.0, 0.5, 4, true, "box");    // 6.5
+  result = grasper.go_near_object(0.0, 0.0, 0.20, 4, false, "box");  // 6.5
   result = grasper.departure(1.0, 4, false);  // leaving after grabbing
 
+  // drop object
+  result = grasper.go_to_pos(0, false);
   // going back to stand
-  result = grasper.go_near_object(0.0, 0.0, 1.0, 4, true, "stand");   // 6.5
-  result = grasper.go_near_object(0.0, 0.0, 0.2, 4, false, "stand");  // 6.5
+  result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "stand");  // 6.5
+  result = grasper.go_near_object(0.0, 0.0, 0.2, 4, true, "stand");   // 6.5
   result = grasper.go_near_object(0.0, 0.0, 0.0, 4, false, "stand");  // 6.5
   // result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "box");
 
@@ -45,3 +47,18 @@ int main() {
   // result = grasper.departure(1.5,4.0,false);
   // result = grasper.go_to_pos(1);
 }
+
+// WORKING GRABBING
+//  // grabbing object
+//   result = grasper.go_near_object(0.0, 0.0, 1.0, 4, true, "box");    // 6.5
+//   result = grasper.go_near_object(0.0, 0.0, 0.5, 4, false, "box");   // 6.5
+//   result = grasper.go_near_object(0.0, 0.0, 0.20, 4, false, "box");  // 6.5
+//   result = grasper.departure(1.0, 4, false);  // leaving after grabbing
+
+//   // drop object
+//   result = grasper.go_to_pos(0, false);
+//   // going back to stand
+//   result = grasper.go_near_object(0.0, 0.0, 1.0, 4, true, "stand");   // 6.5
+//   result = grasper.go_near_object(0.0, 0.0, 0.2, 4, false, "stand");  // 6.5
+//   result = grasper.go_near_object(0.0, 0.0, 0.0, 4, false, "stand");  // 6.5
+//   // result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "box");
