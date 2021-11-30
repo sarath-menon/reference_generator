@@ -34,6 +34,13 @@ Grasper::Grasper() {
 
   // Initialize position publisher
   position_pub->init();
+
+  // Create position cmd publisher
+  gripper_pub = new DDSPublisher(idl_msg::QuadPositionCmdPubSubType(),
+                                 "grip_cmd", dp->participant());
+
+  // Initialize position publisher
+  gripper_pub->init();
 }
 
 Grasper::~Grasper() {
@@ -41,4 +48,5 @@ Grasper::~Grasper() {
   delete mocap_object_sub;
   delete mocap_stand_sub;
   delete position_pub;
+  delete gripper_pub;
 }

@@ -18,11 +18,14 @@ class Grasper {
   ~Grasper();
 
  private:
-  // Current state
+  // Current grip_cmd
   cpp_msg::Mocap quad_pose_{};
 
   // position cmd sent to quad
   cpp_msg::QuadPositionCmd quad_pos_cmd{};
+
+  // gripper cmd sent to quad
+  cpp_msg::QuadPositionCmd grip_cmd{};
 
   // object position
   cpp_msg::Mocap object_pose_{};
@@ -45,6 +48,9 @@ class Grasper {
 
   // Create publisher with msg type
   DDSPublisher *position_pub;
+
+  // Create publisher with msg type
+  DDSPublisher *gripper_pub;
 
   // parameter
  private:
@@ -115,6 +121,8 @@ class Grasper {
  public:
   /// Setter function
   bool go_to_pos(const int index, const bool pos_flag);
+
+  bool grip(const int grip_msg);
 
   bool go_near_object(const float x_ref, const float y_ref, const float z_ref,
                       const float time, const bool pos_flag,

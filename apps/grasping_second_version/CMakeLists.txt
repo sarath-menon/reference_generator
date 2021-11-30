@@ -6,6 +6,7 @@ src/set_parameters.cpp
 src/go_near_object.cpp
 src/departure.cpp
 src/go_to_pos.cpp
+src/grip.cpp
 )
 
 target_include_directories(grasping_second_version PUBLIC include)

@@ -18,19 +18,27 @@ int main() {
   // GRASPING OBJECT FROM STAND
   // taking off via pos_ctrl_interface
 
-  // grabbing object
-  result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "box");   // 6.5
-  result = grasper.go_near_object(0.0, 0.0, 0.5, 4, true, "box");    // 6.5
-  result = grasper.go_near_object(0.0, 0.0, 0.20, 4, false, "box");  // 6.5
-  result = grasper.departure(1.0, 4, false);  // leaving after grabbing
+  //  TESTING GRABB
+  while (true) {
+    result = grasper.grip(1);
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+    result = grasper.grip(0);
+    std::this_thread::sleep_for(std::chrono::milliseconds(200));
+  }
 
-  // drop object
-  result = grasper.go_to_pos(0, false);
-  // going back to stand
-  result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "stand");  // 6.5
-  result = grasper.go_near_object(0.0, 0.0, 0.2, 4, true, "stand");   // 6.5
-  result = grasper.go_near_object(0.0, 0.0, 0.0, 4, false, "stand");  // 6.5
-  // result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "box");
+  // GRABBING OBJECT
+  // result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "box");   // 6.5
+  // result = grasper.go_near_object(0.0, 0.0, 0.5, 4, true, "box");    // 6.5
+  // result = grasper.go_near_object(0.0, 0.0, 0.20, 4, false, "box");  // 6.5
+  // result = grasper.departure(1.0, 4, false);  // leaving after grabbing
+  // result = grasper.grip(1);
+  // // drop object
+  // result = grasper.go_to_pos(0, false);
+  // // going back to stand
+  // result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "stand");  // 6.5
+  // result = grasper.go_near_object(0.0, 0.0, 0.2, 4, true, "stand");   // 6.5
+  // result = grasper.go_near_object(0.0, 0.0, 0.0, 4, false, "stand");  // 6.5
+  // // result = grasper.go_near_object(0.0, 0.0, 1.0, 5, false, "box");
 
   // ON GROUND
 
