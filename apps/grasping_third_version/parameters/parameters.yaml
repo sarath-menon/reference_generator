@@ -1,0 +1,22 @@
+# Set position setpoints
+
+dt: 0.02 # [seconds]
+delay_time: 20 # [miliseconds]  (dt * 1000)
+
+# starting position
+startPoint_completion_time: 2.0 # [seconds]
+startPoint_wait_swoop: 1000 # [miliseconds]
+
+# swoop
+swoop_completion_time: 2 # [seconds]
+swoop_wait_mid: 1000 # [miliseconds]
+
+# reach flag thresholds
+xy_threshold: 0.2 #[meters]
+z_threshold: 0.2 #[meters]
+
+object_name: "srl_box" #name of object to be grasped
+quad_name: "srl_quad" #name of object to be grasped
+
+#prefix of DDS topic
+topic_prefix: "mocap_"
