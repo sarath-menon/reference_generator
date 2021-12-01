@@ -4,12 +4,12 @@ dt: 0.02 # [seconds]
 delay_time: 20 # [miliseconds]  (dt * 1000)
 
 # starting position
-startPoint_completion_time: 2.0 # [seconds]
-startPoint_wait_swoop: 1000 # [miliseconds]
+startPoint_completion_time: 1.2 # [seconds]
+startPoint_wait_swoop: 4000 # [miliseconds]
 
 # swoop
-swoop_completion_time: 2 # [seconds]
-swoop_wait_mid: 1000 # [miliseconds]
+swoop_completion_time: 2.0 # [seconds]
+swoop_wait_mid: 2000 # [miliseconds]
 
 # reach flag thresholds
 xy_threshold: 0.2 #[meters]

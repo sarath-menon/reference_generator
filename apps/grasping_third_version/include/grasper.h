@@ -4,6 +4,8 @@
 
 #include "MocapPubSubTypes.h"
 #include "QuadPositionCmdPubSubTypes.h"
+#include "RapidTrajectoryGenerator.h"
+#include "Vec3.h"
 #include "default_participant.h"
 #include "default_publisher.h"
 #include "default_subscriber.h"
@@ -11,8 +13,6 @@
 #include "helper.h"
 #include "quadcopter_msgs/msgs/QuadPositionCmd.h"
 #include "sensor_msgs/msgs/Mocap.h"
-#include "Vec3.h"
-#include "RapidTrajectoryGenerator.h"
 
 class Grasper {
  public:
@@ -62,7 +62,7 @@ class Grasper {
   // controller sampling time in milliseconds
   int delay_time_{};
 
-  // new parameters 
+  // new parameters
   float startPoint_completion_time_{};
   int startPoint_wait_swoop_{};
   float swoop_completion_time_{};
@@ -107,24 +107,18 @@ class Grasper {
   const int &delay_time() const { return delay_time_; }
 
   /// Getter function
-  const float &startPoint_completion_time() const { 
-    return startPoint_completion_time_; 
+  const float &startPoint_completion_time() const {
+    return startPoint_completion_time_;
   }
 
   /// Getter function
-  const int &startPoint_wait_swoop() const { 
-    return startPoint_wait_swoop_; 
-  }
+  const int &startPoint_wait_swoop() const { return startPoint_wait_swoop_; }
 
   /// Getter function
-  const float &swoop_completion_time() const { 
-    return swoop_completion_time_; 
-  }
+  const float &swoop_completion_time() const { return swoop_completion_time_; }
 
   /// Getter function
-  const int &swoop_wait_mid() const { 
-    return swoop_wait_mid_; 
-  }
+  const int &swoop_wait_mid() const { return swoop_wait_mid_; }
 
   /// Getter function
   const float &xy_threshold() const { return xy_threshold_; }
@@ -152,10 +146,12 @@ class Grasper {
  public:
   /// Setter function
   bool go_to_pos(const int index, const bool pos_flag);
+  bool go_to_pos(const float x_ref, const float y_ref, const float z_ref,
+                 const float time, const bool pos_flag);
 
   /**
    * Goes to the given position using minimal jerk algorithm
-   * 
+   *
    * @param[in] pos_init starting position
    * @param[in] vel_init starting velocity
    * @param[in] acc_init starting acceleration
@@ -165,10 +161,10 @@ class Grasper {
    * @param[in] g gravity
    * @returns Bool : Target has been reached ?
    **/
-  bool go_to_pos_minJerk(
-                  const Vec3 pos_init, const Vec3 vel_init, const Vec3 acc_init,
-                  const Vec3 pos_fin, const Vec3 vel_fin, const Vec3 acc_fin,
-                  const Vec3 g, const float completion_time);
+  bool go_to_pos_minJerk(const Vec3 pos_init, const Vec3 vel_init,
+                         const Vec3 acc_init, const Vec3 pos_fin,
+                         const Vec3 vel_fin, const Vec3 acc_fin, const Vec3 g,
+                         const float completion_time);
 
   bool grip(const int grip_msg);
 
@@ -182,4 +178,31 @@ class Grasper {
   void set_parameters(const std::string path);
 
   void load_setpoints(const std::string path);
+
+  bool wait_for_data_quad() {
+    // mocap_quad_sub->listener->wait_for_data();
+    for (int i = 0; i < 30; i++) {
+      float id = quad_pose_.pose.position.x;
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+    return true;
+  }
+  bool wait_for_data_object() {
+    // mocap_object_sub->listener->wait_for_data();
+    for (int i = 0; i < 30; i++) {
+      float id = object_pose_.pose.position.x;
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+    return true;
+    return true;
+  }
+  bool wait_for_data_stand() {
+    // mocap_stand_sub->listener->wait_for_data();
+    for (int i = 0; i < 30; i++) {
+      float id = stand_pose_.pose.position.x;
+      std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
+    return true;
+    return true;
+  }
 };

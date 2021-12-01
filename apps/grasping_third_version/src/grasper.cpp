@@ -12,6 +12,7 @@ Grasper::Grasper() {
 
   // initialize  subscriberDefaultParticipant
   mocap_quad_sub->init();
+  mocap_quad_sub->listener->wait_for_data();
 
   // Create  subscriber for object mocap
   mocap_object_sub =
