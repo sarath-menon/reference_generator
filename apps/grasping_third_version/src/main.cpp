@@ -9,7 +9,7 @@
 #include "paths.h"
 #include "quadcopter_msgs/msgs/QuadPositionCmd.h"
 
-void swoop(Grasper& grasp, float objx, float objy, float boxx, float boxy) {
+void swoop(Grasper& grasp, Vec3 obj, Vec3 box, Vec3 ps, Vec3 pf) {
   Vec3 gravity = Vec3(0, 0, -9.81);
   // set acc and vel comands to 0
   Vec3 vel0 = Vec3(0, 0, 0);
@@ -18,38 +18,38 @@ void swoop(Grasper& grasp, float objx, float objy, float boxx, float boxy) {
   Vec3 accf = Vec3(0, 0, 0);
 
   // swoop first half
-  Vec3 pos0 = Vec3(objx - 2.0, objy, 2.0);
-  Vec3 posf = Vec3(objx - 0.2, objy, 0.75);
+  Vec3 pos0 = ps;
+  Vec3 posf = Vec3(obj.x - 0.4, obj.y, 0.75);
   grasp.go_to_pos_minJerk(pos0, vel0, acc0, posf, velf, accf, gravity, 2);
 
-  grasp.go_to_pos(objx, objy, 0.6, 4, false);
-  grasp.go_to_pos(objx, objy, 0.45, 4, false);
-  grasp.go_to_pos(objx, objy, 0.6, 2, false);
+  grasp.go_to_pos(obj.x + 0.1, obj.y, 0.6, 4, false);
+  grasp.go_to_pos(obj.x + 0.1, obj.y, obj.z, 4, false);
+  grasp.go_to_pos(obj.x + 0.1, obj.y, 0.6, 2, false);
   // swoop second half
-  pos0 = Vec3(objx, objy, 0.75);
-  posf = Vec3(objx + 2.0, objy, 2.0);
+  pos0 = Vec3(obj.x, obj.y, 0.75);
+  posf = Vec3(obj.x + 2.0, obj.y, 2.0);
   grasp.go_to_pos_minJerk(pos0, vel0, acc0, posf, velf, accf, gravity, 2);
 
   // transfer to box
-  pos0 = Vec3(objx + 2.0, objy, 2.0);
-  posf = Vec3(boxx + 2.0, boxy, 2.0);
+  pos0 = Vec3(obj.x + 2.0, obj.y, 2.0);
+  posf = Vec3(box.x + 2.0, box.y, 2.0);
   grasp.go_to_pos_minJerk(pos0, vel0, acc0, posf, velf, accf, gravity, 3);
 
   // swoop first half
-  pos0 = Vec3(boxx + 2.0, boxy, 2.0);
-  posf = Vec3(boxx, boxy, 0.75);
+  pos0 = Vec3(box.x + 2.0, box.y, 2.0);
+  posf = Vec3(box.x, box.y, 0.75);
   grasp.go_to_pos_minJerk(pos0, vel0, acc0, posf, velf, accf, gravity, 2);
 
   std::this_thread::sleep_for(std::chrono::milliseconds(2500));
 
   // swoop second half
-  pos0 = Vec3(boxx, boxy, 0.75);
-  posf = Vec3(boxx - 1.5, boxy, 2.0);
+  pos0 = Vec3(box.x, box.y, 0.75);
+  posf = Vec3(box.x - 1.5, box.y, 2.0);
   grasp.go_to_pos_minJerk(pos0, vel0, acc0, posf, velf, accf, gravity, 2);
 
   // transfer to object
-  pos0 = Vec3(boxx - 1.5, boxy, 2.0);
-  posf = Vec3(objx - 2.0, objy, 2.0);
+  pos0 = Vec3(box.x - 1.5, box.y, 2.0);
+  posf = pf;
   grasp.go_to_pos_minJerk(pos0, vel0, acc0, posf, velf, accf, gravity, 3);
 }
 
@@ -85,24 +85,46 @@ int main() {
 
   grasper.go_to_pos_minJerk(pos0, vel0, acc0, posf, velf, accf, gravity, 2);
   std::this_thread::sleep_for(std::chrono::milliseconds(1500));
-
-  // swoop
-  swoop(grasper, grasper.object_pose().pose.position.x,
-        grasper.object_pose().pose.position.y, 0, -1.5);
+  constexpr float stand_offset = 0.29;
+  Vec3 box = Vec3(0, -1.5, 0);
+  ///////////FIRST SWOOP
+  Vec3 object = Vec3(grasper.object_pose().pose.position.x,
+                     grasper.object_pose().pose.position.y - 0.01, 0.45);
+  Vec3 start = Vec3(grasper.object_pose().pose.position.x - 2.0,
+                    grasper.object_pose().pose.position.y, 2.0);
+  Vec3 end =
+      Vec3(grasper.object_pose().pose.position.x - 2.0,
+           grasper.object_pose().pose.position.y - stand_offset - 0.01, 2.0);
+  swoop(grasper, object, box, start, end);
+  // ///////////SECOND SWOOP
+  object =
+      Vec3(grasper.object_pose().pose.position.x,
+           grasper.object_pose().pose.position.y - stand_offset - 0.01, 0.45);
+  start =
+      Vec3(grasper.object_pose().pose.position.x - 2.0,
+           grasper.object_pose().pose.position.y - stand_offset - 0.01, 2.0);
+  end = Vec3(grasper.object_pose().pose.position.x - 2.0,
+             grasper.object_pose().pose.position.y + stand_offset + 0.02, 2.0);
+  swoop(grasper, object, box, start, end);
+  // ///////////THIRD SWOOP
+  object =
+      Vec3(grasper.object_pose().pose.position.x,
+           grasper.object_pose().pose.position.y + stand_offset + 0.02, 0.45);
+  start =
+      Vec3(grasper.object_pose().pose.position.x - 2.0,
+           grasper.object_pose().pose.position.y + stand_offset + 0.02, 2.0);
+  end = Vec3(grasper.object_pose().pose.position.x - 2.0,
+             grasper.object_pose().pose.position.y, 2.0);
+  swoop(grasper, object, box, start, end);
 
   ////////GO TO STAND AND LAND
-  // to stand
   pos0 = Vec3(grasper.object_pose().pose.position.x - 2.0,
               grasper.object_pose().pose.position.y, 2.0);
-
   posf = Vec3(grasper.stand_pose().pose.position.x,
               grasper.stand_pose().pose.position.y, 1.5);
-
-  // execute
-  std::cout << "Go to homebase" << std::endl;
   grasper.go_to_pos_minJerk(pos0, vel0, acc0, posf, velf, accf, gravity, 2);
 
-  std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+  // std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
   // land on stand
   grasper.go_to_pos(grasper.stand_pose().pose.position.x,
